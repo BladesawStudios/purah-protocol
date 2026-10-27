@@ -197,7 +197,7 @@ A2A604|2|
 # exit 4: branch at 70A1B0
 70852C|4|
 # exit 5: branch at 70BE24
-70852C|5|one of the controller set files in the config's list did not load (its resource slot is empty) or came back with parameter entries it should not have; either clears the "everything loaded" flag and the whole config is rejected
+70852C|5|one of the controller set's lists was cut short: an entry's file was missing or the wrong kind, or (ControllerEntityNamePathAry) an entry's Name is not one of the game's fixed controller entity names (Body, StaticBody, Ragdoll, BodyParts_00 to BodyParts_03, Secure, StaticCompoundOnly, Player, Lod, EntitySensor, NavMeshCut, StaticCutting, StaticCuttingBody, StaticCuttingStaticBody, StaticBreakableBody, BreakableBody); an entry with such a name is skipped without its file being loaded, so look for a listed file that never shows in the 'Controller set file found' steps
 # exit 6: branch at 70CFC0
 70852C|6|
 # exit 7: branch at 70D3AC
