@@ -202,3 +202,4 @@ actorinit	engine::actor::ActorBase::initializeComponent	site	7100d5ee34	d5ee34	c
 physics	phive::GroupIdMgrBase::allocateGroupID	fn	7100c74f7c	c74f7c	
 physics	phive::CreatePhiveEntityControlExtension	fn	71007175e0	7175e0	
 physics	engine::component::PhysicsParam::getControllerSetPath	fn	710248f8c4	248f8c4	
+physics	phive::ControllerSetConfig::loadListedFile	fn	710070eab8	70eab8	

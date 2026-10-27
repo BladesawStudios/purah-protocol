@@ -1004,6 +1004,11 @@ purah_stub_198:
 purah_stub_199:
     mov   w16, #199
     b     purah_common
+    .balign 4
+    .global purah_stub_200
+purah_stub_200:
+    mov   w16, #200
+    b     purah_common
 )");
 
 extern "C" {
@@ -1207,6 +1212,7 @@ void purah_stub_196();
 void purah_stub_197();
 void purah_stub_198();
 void purah_stub_199();
+void purah_stub_200();
 }
 
 namespace purah::book {
@@ -1414,6 +1420,7 @@ constexpr StubFn kStubs[kCount] = {
     &purah_stub_197,
     &purah_stub_198,
     &purah_stub_199,
+    &purah_stub_200,
 };
 
 }  // namespace purah::book

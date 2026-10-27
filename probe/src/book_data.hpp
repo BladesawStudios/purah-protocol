@@ -10,8 +10,8 @@ enum class Resolver : uint8_t { None, Proc, Component, NameArg, InfoName };
 constexpr uint16_t kNoStep = 0xFFFF;
 struct Row { uint32_t offset; Kind kind; Resolver resolver; bool scope; bool failZero; bool noReturn; uint16_t step; };
 
-constexpr uint32_t kCount = 200;
-constexpr uint32_t kHash = 0xA09A04EA;
+constexpr uint32_t kCount = 201;
+constexpr uint32_t kHash = 0x69F48876;
 
 constexpr Row kRows[kCount] = {
     {0xAB92CC, Kind::Function, Resolver::NameArg, false, true, false, 0},  // 0 engine::actor::ActorMgr::requestCreateActorAsync
@@ -85,11 +85,11 @@ constexpr Row kRows[kCount] = {
     {0xA2A604, Kind::Function, Resolver::Component, false, true, false, 25},  // 68 engine::component::LODComponent::postInitialize
     {0xDDE8E0, Kind::Function, Resolver::Component, false, false, false, kNoStep},  // 69 engine::component::LODComponent::setCalcInterval
     {0x97A058, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 70 gsys::ModelScene::calcView_
-    {0x8AF58C, Kind::Function, Resolver::None, false, false, false, 52},  // 71 ares::ResourceUnit::loadFile
-    {0x798350, Kind::Function, Resolver::None, false, true, false, 53},  // 72 ares::ResourceUnit::initializeResource
+    {0x8AF58C, Kind::Function, Resolver::None, false, false, false, 53},  // 71 ares::ResourceUnit::loadFile
+    {0x798350, Kind::Function, Resolver::None, false, true, false, 54},  // 72 ares::ResourceUnit::initializeResource
     {0x7CCE14, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 73 ares::ResourceUnit::initialize
     {0x79A8C8, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 74 ares::ResourceBinder::updateStatusFromResourceUnit
-    {0x76F8F0, Kind::Function, Resolver::None, false, true, false, 51},  // 75 ares::ResourceBinder::tryLoadSync
+    {0x76F8F0, Kind::Function, Resolver::None, false, true, false, 52},  // 75 ares::ResourceBinder::tryLoadSync
     {0x7B6F38, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 76 ares::ResourceBinder::tryLoadAsync
     {0x76FECC, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 77 ares::System::tryLoadSyncImpl
     {0x7B7070, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 78 ares::System::tryLoadAsyncImpl
@@ -144,7 +144,7 @@ constexpr Row kRows[kCount] = {
     {0x72590, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 127 nn::g3d2::ResMaterial::Setup
     {0x727A0, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 128 nn::g3d2::ResShape::Setup
     {0x7499C, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 129 nn::g3d2::ResShape::Setup
-    {0x760398, Kind::Function, Resolver::None, false, false, false, 57},  // 130 gsys::G3dResModelEx::initialize
+    {0x760398, Kind::Function, Resolver::None, false, false, false, 58},  // 130 gsys::G3dResModelEx::initialize
     {0x761438, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 131 gsys::G3dResShapeEx::initialize
     {0x93DDA8, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 132 gsys::Model::create_
     {0x96F174, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 133 gsys::ModelScene::calcRenderQueue_
@@ -160,9 +160,9 @@ constexpr Row kRows[kCount] = {
     {0x75CEB4, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 143 nn::g3d2::ResFile::ResCast
     {0x75D3E4, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 144 nn::g3d2::ResFile::Setup
     {0x75CEF0, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 145 agl::g3d::ResFile::Setup
-    {0x75C140, Kind::Function, Resolver::None, false, false, false, 55},  // 146 gsys::ModelResource::create_
-    {0x75D59C, Kind::Function, Resolver::None, false, false, false, 56},  // 147 gsys::ModelResource::initialize_
-    {0xD97B5C, Kind::Function, Resolver::None, false, false, false, 54},  // 148 engine::resource::ModelResource::postInitialize_
+    {0x75C140, Kind::Function, Resolver::None, false, false, false, 56},  // 146 gsys::ModelResource::create_
+    {0x75D59C, Kind::Function, Resolver::None, false, false, false, 57},  // 147 gsys::ModelResource::initialize_
+    {0xD97B5C, Kind::Function, Resolver::None, false, false, false, 55},  // 148 engine::resource::ModelResource::postInitialize_
     {0x245BEA4, Kind::Function, Resolver::Component, false, false, false, 27},  // 149 engine::component::AIComponent::postInitialize
     {0x7A3DC0, Kind::Function, Resolver::None, false, true, false, 26},  // 150 engine::ai::AIControllerSet::initialize
     {0xA2C958, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 151 shaft::baseproc::BaseProcMgr::tryAddDependency
@@ -180,23 +180,23 @@ constexpr Row kRows[kCount] = {
     {0x78B8E8, Kind::Function, Resolver::Component, false, false, false, 28},  // 163 engine::component::PhysicsComponent::initialize
     {0x70775C, Kind::Function, Resolver::Component, false, true, false, 30},  // 164 engine::component::PhysicsComponent::postInitialize
     {0x707F54, Kind::Function, Resolver::None, false, false, false, 31},  // 165 phive::CreateControllerSetConfig
-    {0x70852C, Kind::Function, Resolver::None, false, false, false, 32},  // 166 phive::ControllerSetConfig::initialize
-    {0x708088, Kind::Function, Resolver::None, false, true, false, 34},  // 167 phive::CreateControllerSet
-    {0x70F50C, Kind::Function, Resolver::None, false, true, false, 35},  // 168 phive::ControllerSet::initialize
-    {0x719028, Kind::Function, Resolver::None, false, false, false, 39},  // 169 phive::CreateRigidBodyControllerEntity
-    {0x717A44, Kind::Function, Resolver::None, false, false, false, 38},  // 170 phive::CreateRigidBodyControllerSensor
-    {0x71D8CC, Kind::Function, Resolver::None, false, true, false, 40},  // 171 phive::CreateRigidBodyEntity
-    {0x71DCA0, Kind::Function, Resolver::None, false, true, false, 41},  // 172 phive::CreateRigidBodyEntityImpl
-    {0xD13BC0, Kind::Function, Resolver::None, false, true, false, 42},  // 173 phive::CreateRigidBodySensor
-    {0x86EDCC, Kind::Function, Resolver::None, false, true, false, 43},  // 174 phive::CreateShapeMesh
-    {0x8727B4, Kind::Function, Resolver::None, false, true, false, 44},  // 175 phive::CreateShapeBox
-    {0xDA047C, Kind::Function, Resolver::None, false, true, false, 45},  // 176 phive::CreateShapeSphere
-    {0xCF18CC, Kind::Function, Resolver::None, false, false, false, 46},  // 177 phive::CreateShapeCapsule
-    {0xCF19B0, Kind::Function, Resolver::None, false, true, false, 47},  // 178 phive::CreateShapeCapsule
-    {0x873004, Kind::Function, Resolver::None, false, false, false, 48},  // 179 phive::CreateShapeCylinder
-    {0x7359FC, Kind::Function, Resolver::None, false, true, false, 49},  // 180 phive::CreateShapeCompound
-    {0xD742B0, Kind::Function, Resolver::None, false, false, false, 50},  // 181 phive::ShapeResource::doCreate_
-    {0x23080D0, Kind::Function, Resolver::None, false, false, false, 33},  // 182 phive::ControllerSetConfig::findResource
+    {0x70852C, Kind::Function, Resolver::None, false, false, false, 33},  // 166 phive::ControllerSetConfig::initialize
+    {0x708088, Kind::Function, Resolver::None, false, true, false, 35},  // 167 phive::CreateControllerSet
+    {0x70F50C, Kind::Function, Resolver::None, false, true, false, 36},  // 168 phive::ControllerSet::initialize
+    {0x719028, Kind::Function, Resolver::None, false, false, false, 40},  // 169 phive::CreateRigidBodyControllerEntity
+    {0x717A44, Kind::Function, Resolver::None, false, false, false, 39},  // 170 phive::CreateRigidBodyControllerSensor
+    {0x71D8CC, Kind::Function, Resolver::None, false, true, false, 41},  // 171 phive::CreateRigidBodyEntity
+    {0x71DCA0, Kind::Function, Resolver::None, false, true, false, 42},  // 172 phive::CreateRigidBodyEntityImpl
+    {0xD13BC0, Kind::Function, Resolver::None, false, true, false, 43},  // 173 phive::CreateRigidBodySensor
+    {0x86EDCC, Kind::Function, Resolver::None, false, true, false, 44},  // 174 phive::CreateShapeMesh
+    {0x8727B4, Kind::Function, Resolver::None, false, true, false, 45},  // 175 phive::CreateShapeBox
+    {0xDA047C, Kind::Function, Resolver::None, false, true, false, 46},  // 176 phive::CreateShapeSphere
+    {0xCF18CC, Kind::Function, Resolver::None, false, false, false, 47},  // 177 phive::CreateShapeCapsule
+    {0xCF19B0, Kind::Function, Resolver::None, false, true, false, 48},  // 178 phive::CreateShapeCapsule
+    {0x873004, Kind::Function, Resolver::None, false, false, false, 49},  // 179 phive::CreateShapeCylinder
+    {0x7359FC, Kind::Function, Resolver::None, false, true, false, 50},  // 180 phive::CreateShapeCompound
+    {0xD742B0, Kind::Function, Resolver::None, false, false, false, 51},  // 181 phive::ShapeResource::doCreate_
+    {0x23080D0, Kind::Function, Resolver::None, false, false, false, 34},  // 182 phive::ControllerSetConfig::findResource
     {0xCF059C, Kind::Function, Resolver::None, false, false, false, kNoStep},  // 183 engine::physics::PhysicsModule::actorPrepare_
     {0x7FD7A0, Kind::Site, Resolver::None, false, true, false, 4},  // 184 shaft::baseproc::BaseProc::initialize
     {0x7FD904, Kind::Site, Resolver::None, false, true, true, 5},  // 185 shaft::baseproc::BaseProc::initialize
@@ -211,16 +211,17 @@ constexpr Row kRows[kCount] = {
     {0xD5EE18, Kind::Site, Resolver::None, false, false, false, 20},  // 194 engine::actor::ActorBase::initializeComponent
     {0xD5F04C, Kind::Site, Resolver::None, false, false, true, 21},  // 195 engine::actor::ActorBase::initializeComponent
     {0xD5EE34, Kind::Site, Resolver::None, false, false, false, 22},  // 196 engine::actor::ActorBase::initializeComponent
-    {0xC74F7C, Kind::Function, Resolver::None, false, false, false, 36},  // 197 phive::GroupIdMgrBase::allocateGroupID
-    {0x7175E0, Kind::Function, Resolver::None, false, false, false, 37},  // 198 phive::CreatePhiveEntityControlExtension
+    {0xC74F7C, Kind::Function, Resolver::None, false, false, false, 37},  // 197 phive::GroupIdMgrBase::allocateGroupID
+    {0x7175E0, Kind::Function, Resolver::None, false, false, false, 38},  // 198 phive::CreatePhiveEntityControlExtension
     {0x248F8C4, Kind::Function, Resolver::None, false, false, false, 29},  // 199 engine::component::PhysicsParam::getControllerSetPath
+    {0x70EAB8, Kind::Function, Resolver::None, false, false, false, 32},  // 200 phive::ControllerSetConfig::loadListedFile
 };
 
 enum class Rule : uint8_t { Zero, Code, Warn, None };
-enum class Named : uint8_t { No, Arg0, Result, Path1, ResultStr };
+enum class Named : uint8_t { No, Arg0, Result, Path1, ResultStr, Item };
 struct Step { uint32_t row; uint8_t phase; Rule rule; Named named; bool root; bool request; bool container; bool sret; uint8_t stage; const char* label; const char* meaning; };
 
-constexpr uint32_t kStepCount = 58;
+constexpr uint32_t kStepCount = 59;
 constexpr const char* kPhases[] = {"Request", "Initialise", "Actor", "Actor info", "Parameters", "Components", "Late component", "Game parameters", "AI", "Physics", "Resources", "Model"};
 
 constexpr Step kSteps[kStepCount] = {
@@ -256,6 +257,7 @@ constexpr Step kSteps[kStepCount] = {
     {199, 9, Rule::None, Named::ResultStr, false, false, false, false, 0, "Controller set chosen", "Recorded only. This is the controller set the physics component will load (it may be overridden by the actor's blackboard); if the set does not exist or fails to load, the steps after this one fail."},
     {164, 9, Rule::Zero, Named::Arg0, false, false, false, false, 0, "Physics component post-initialise", "PhysicsComponent::postInitialize fails when the controller set config or the controller set cannot be created. The steps below it in the ladder say which of them failed and where."},
     {165, 9, Rule::Zero, Named::No, false, false, false, false, 0, "Controller set config created", "The controller set config could not be created: the ControllerSetParam document did not load or its initialisation rejected it. Check Phive/ControllerSetParam/<set> exists and loads, and the files it lists."},
+    {200, 9, Rule::Zero, Named::Item, false, false, false, false, 0, "Controller set file loaded", "A file the controller set lists could not be loaded, or loaded as the wrong kind of file. The path is named: check that it is in the actor pack under exactly that name, and that its file name ends in the class the list expects (phive__ShapeParam, phive__RigidBodyEntityParam, and so on)."},
     {166, 9, Rule::Zero, Named::No, false, false, false, false, 0, "Controller set config initialise", "The controller set config was rejected while being built from the ControllerSetParam. Check every file and shape it lists loads (the steps just before this one show which failed)."},
     {182, 9, Rule::None, Named::No, false, false, false, false, 0, "Controller set config resource lookup", "Recorded only."},
     {167, 9, Rule::Zero, Named::No, false, false, false, false, 0, "Controller set created", "The controller set could not be created from its config. The step that follows it (ControllerSet::initialize) says why."},

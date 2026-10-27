@@ -29,6 +29,9 @@ constexpr uint32_t kDetailDepth = 6;
 // BaseProc::finishInitialization(proc, code, arg) is called with the final code whatever happened; the init function itself only says true or false.
 constexpr uint32_t kFinishInitialization = 0x7FD97C;
 
+// A parameter list entry (a name and a file path in a ControllerSetParam, say) holds the path as a string object at this offset.
+constexpr uint64_t kListEntryValue = 0x30;
+
 struct StepFail {
     uint16_t step;
     uint16_t count;  // how many times this same step failed with this same detail
@@ -99,11 +102,17 @@ inline uint8_t ComponentName(uint64_t object, char* out) {
 
 inline uint8_t ReadString(uint64_t p, char* out) { return static_cast<uint8_t>(ReadCString(p, out, kDetailMax - 1)); }
 
+// A step named from its input (the component, document or list entry it was given) keeps that name from its start to its end.
+inline bool NamedFromInput(book::Named named) {
+    return named == book::Named::Arg0 || named == book::Named::Path1 || named == book::Named::Item;
+}
+
 // What a step is about, from what the call was given: a component (its vtable, in the first argument) or a document (the second
 // argument points at a pointer to its path).
 inline uint8_t EnterDetail(const book::Step& step, const uint64_t* args, char* out) {
     if (step.named == book::Named::Arg0) return ComponentName(args[0], out);
     if (step.named == book::Named::Path1) return Readable(args[1], 8) ? ReadString(*reinterpret_cast<const uint64_t*>(args[1]), out) : uint8_t(0);
+    if (step.named == book::Named::Item) return static_cast<uint8_t>(ReadText(args[0] + kListEntryValue, out, kDetailMax - 1));
     return 0;
 }
 
@@ -194,7 +203,7 @@ inline int WatchEnter(uint32_t row, const uint64_t* args) {
     char detail[kDetailMax];
     const uint8_t detailLength = EnterDetail(step, args, detail);
     const bool hasEnd = !(book::kRows[row].kind == book::Kind::Site && book::kRows[row].noReturn);
-    const bool pushes = (step.named == book::Named::Arg0 || step.named == book::Named::Path1) && hasEnd;
+    const bool pushes = NamedFromInput(step.named) && hasEnd;
     if (pushes && g_watch.stackDepth < kDetailDepth) {
         for (uint8_t i = 0; i < detailLength; ++i) g_watch.stack[g_watch.stackDepth][i] = detail[i];
         g_watch.stackLength[g_watch.stackDepth++] = detailLength;
@@ -306,7 +315,7 @@ inline void WatchExit(uint32_t row, int index, uint64_t* value) {
     host::LockGuard guard(g_watch.lock);
     char detail[kDetailMax];
     uint8_t detailLength = 0;
-    const bool popped = step.named == book::Named::Arg0 || step.named == book::Named::Path1;
+    const bool popped = NamedFromInput(step.named);
     if (popped) {
         if (g_watch.stackDepth > 0) {
             --g_watch.stackDepth;
