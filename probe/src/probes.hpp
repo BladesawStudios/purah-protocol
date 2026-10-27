@@ -172,9 +172,10 @@ inline uint64_t DispatchHook(uint32_t id, Frame* f) {
     }
     After(id, &r, pass);
     if (watched >= 0) {
-        // A function that returns its result through memory (the document loaders: x8 is the address of the result) is judged by what it wrote there.
+        // A function that returns its result through memory is judged by what it wrote there: the address in x8 (the document loaders), or the first argument.
         uint64_t seen = r;
         if (book::kSteps[watched].sret) seen = Readable(f->x8, 8) ? *reinterpret_cast<const uint64_t*>(f->x8) : 0;
+        if (book::kSteps[watched].out0) seen = Readable(f->x[0], 8) ? *reinterpret_cast<const uint64_t*>(f->x[0]) : 0;
         WatchExit(id, watched, &seen);
     }
     if (scoped) PopScope();
