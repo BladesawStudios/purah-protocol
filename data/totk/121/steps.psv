@@ -8,11 +8,10 @@
 #                                      warn  = a zero return is worth saying but the game carries on
 #                                      none  = recorded, never judged
 #   named   what to name the step after: arg0 = the component whose vtable is in the first argument,
-#           result = the component the call returned, path2 = the string whose pointer the third argument points to, - = nothing
+#           result = the component the call returned, - = nothing
 #   flags   root = the step whose return ends the actor's initialisation (the verdict is built there);
 #           stage=preload|initialize|post = a call site that runs one stage of the component named in its first argument (the exit table
 #           for that component's stage function says which way it failed);
-#           out0 = the result is written to the memory the first argument points at, not returned;
 #           container = a step that fails because something inside it failed (so the verdict names the deepest failure, and uses a container only when nothing inside it did);
 #           request = the step that sees the creation request; - = none
 #   label   what the step is, in a few words
@@ -52,7 +51,7 @@ a2a604|Components|zero|arg0|-|LOD component|The LOD document is missing or is no
 248f8c4|Physics|none|resultstr|-|Controller set chosen|Recorded only. This is the controller set the physics component will load (it may be overridden by the actor's blackboard); if the set does not exist or fails to load, the steps after this one fail.
 70775c|Physics|zero|arg0|-|Physics component post-initialise|PhysicsComponent::postInitialize fails when the controller set config or the controller set cannot be created. The steps below it in the ladder say which of them failed and where.
 707f54|Physics|zero|-|-|Controller set config created|The controller set config could not be created: the ControllerSetParam document did not load or its initialisation rejected it. Check Phive/ControllerSetParam/<set> exists and loads, and the files it lists.
-248fe88|Physics|zero|path2|out0|Controller set file found|A file the controller set lists was not found among the actor's loaded resources, or was found but has no parsed document. The path is named: check that it is in the actor pack under exactly that name, that the file is valid, and that the actor's resource preload list covers it.
+248fe88|Physics|zero|path1|sret|Controller set file found|A file the controller set lists was not found among the actor's loaded resources, or was found but has no parsed document. The path is named: check that it is in the actor pack under exactly that name, that the file is valid, and that the actor's resource preload list covers it.
 70852c|Physics|zero|-|-|Controller set config initialise|The controller set config was rejected while being built from the ControllerSetParam. Check every file and shape it lists loads (the steps just before this one show which failed).
 23080d0|Physics|none|-|-|Controller set config resource lookup|Recorded only.
 708088|Physics|zero|-|-|Controller set created|The controller set could not be created from its config. The step that follows it (ControllerSet::initialize) says why.

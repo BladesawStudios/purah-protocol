@@ -165,18 +165,18 @@ for i, (offset, k, r, scope, fail, noret, name) in enumerate(rows):
         str(row_step[i]) if i in row_step else "kNoStep", i, name))
 out += ["};", ""]
 out += ["enum class Rule : uint8_t { Zero, Code, Warn, None };",
-        "enum class Named : uint8_t { No, Arg0, Result, Path1, ResultStr, Path2 };",
-        "struct Step { uint32_t row; uint8_t phase; Rule rule; Named named; bool root; bool request; bool container; bool sret; bool out0; uint8_t stage; const char* label; const char* meaning; };", "",
+        "enum class Named : uint8_t { No, Arg0, Result, Path1, ResultStr };",
+        "struct Step { uint32_t row; uint8_t phase; Rule rule; Named named; bool root; bool request; bool container; bool sret; uint8_t stage; const char* label; const char* meaning; };", "",
         "constexpr uint32_t kStepCount = %d;" % len(steps),
         "constexpr const char* kPhases[] = {%s};" % ", ".join(cpp(x) for x in PHASES), "",
         "constexpr Step kSteps[kStepCount] = {"]
 for s in steps:
     rule = {"zero": "Zero", "code": "Code", "warn": "Warn", "none": "None"}[s[2]]
-    named = {"-": "No", "arg0": "Arg0", "result": "Result", "path1": "Path1", "resultstr": "ResultStr", "path2": "Path2"}[s[3]]
+    named = {"-": "No", "arg0": "Arg0", "result": "Result", "path1": "Path1", "resultstr": "ResultStr"}[s[3]]
     stage = 1 if "stage=preload" in s[4] else 2 if "stage=initialize" in s[4] else 3 if "stage=post" in s[4] else 0
-    out.append("    {%d, %d, Rule::%s, Named::%s, %s, %s, %s, %s, %s, %d, %s, %s}," % (
+    out.append("    {%d, %d, Rule::%s, Named::%s, %s, %s, %s, %s, %d, %s, %s}," % (
         s[0], PHASES.index(s[1]), rule, named, str("root" in s[4]).lower(), str("request" in s[4]).lower(),
-        str("container" in s[4]).lower(), str("sret" in s[4]).lower(), str("out0" in s[4]).lower(), stage, cpp(s[5]), cpp(s[6])))
+        str("container" in s[4]).lower(), str("sret" in s[4]).lower(), stage, cpp(s[5]), cpp(s[6])))
 reasons = []
 for line in open(components_file, encoding="utf-8"):
     line = line.rstrip("\r\n")

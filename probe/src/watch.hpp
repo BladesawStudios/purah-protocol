@@ -100,16 +100,13 @@ inline uint8_t ComponentName(uint64_t object, char* out) {
 inline uint8_t ReadString(uint64_t p, char* out) { return static_cast<uint8_t>(ReadCString(p, out, kDetailMax - 1)); }
 
 // A step named from its input (a component or a path it was given) keeps that name from its start to its end.
-inline bool NamedFromInput(book::Named named) {
-    return named == book::Named::Arg0 || named == book::Named::Path1 || named == book::Named::Path2;
-}
+inline bool NamedFromInput(book::Named named) { return named == book::Named::Arg0 || named == book::Named::Path1; }
 
 // What a step is about, from what the call was given: a component (its vtable, in the first argument) or a document (the second
 // argument points at a pointer to its path).
 inline uint8_t EnterDetail(const book::Step& step, const uint64_t* args, char* out) {
     if (step.named == book::Named::Arg0) return ComponentName(args[0], out);
     if (step.named == book::Named::Path1) return Readable(args[1], 8) ? ReadString(*reinterpret_cast<const uint64_t*>(args[1]), out) : uint8_t(0);
-    if (step.named == book::Named::Path2) return Readable(args[2], 8) ? ReadString(*reinterpret_cast<const uint64_t*>(args[2]), out) : uint8_t(0);
     return 0;
 }
 
