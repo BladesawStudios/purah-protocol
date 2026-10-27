@@ -1,0 +1,2244 @@
+# The reason for each way a step function can return false. TotK 1.2.1.
+#
+# tools/ghidra/ExportReturnSites.py (in purah-protocol) numbers every exit of each step function in address order and writes return_sites.tsv,
+# and the address of each exit. This file says what each exit MEANS. One line per exit:
+#
+#   function|ordinal|reason
+#
+#   function  the function's offset in the book, in hex (the first column of return_sites.tsv)
+#   ordinal   the exit's number in that function (the third column; the debugger shows it as "failure mode ordinal/count")
+#   reason    plain words: what was wrong. Separate several reasons with a semicolon: "the list is empty; the first name is blank".
+#
+# An exit with no line here is shown as "Unknown reason (failure mode 3/17)"; one with a line is shown as "Failure mode (3/17), <reason>".
+# The exit's address (the "exit" column of return_sites.tsv, an offset from the image base) is always shown under it, so a new exit can be looked up.
+# Editing this file does not need the module rebuilt: Prism reads it.
+#
+# Example (not a real exit):
+# 70852c|3|AliasEntityList has more entries than the controller set has controller entities
+
+# ---- worksheet: one line per exit. Fill in the reason after the second |. A line with no reason is shown as an unknown reason. ----
+
+
+# engine::actor::ActorMgr::requestCreateActorAsync  (AB92CC)
+# exit 1: branch at AB96C0
+AB92CC|1|
+# exit 2: branch at AB96C0
+AB92CC|2|
+# exit 3: branch at AB99F0
+AB92CC|3|
+# exit 4: branch at AB9AC0
+AB92CC|4|
+# exit 5: branch at AB9AE8
+AB92CC|5|
+# exit 6: branch at AB9AF4
+AB92CC|6|
+# exit 7: branch at AB9AF4
+AB92CC|7|
+# exit 8: branch at AB9B14
+AB92CC|8|
+# exit 9: fall at AB9B28, cannot be told apart from other paths
+AB92CC|9|
+# exit 10: fall at AB9B44, cannot be told apart from other paths
+AB92CC|10|
+# exit 11: branch at AB9B74
+AB92CC|11|
+# exit 12: branch at AB9B7C
+AB92CC|12|
+# exit 13: branch at AB9BD4
+AB92CC|13|
+# exit 14: fall at AB9BF0
+AB92CC|14|
+# exit 15: branch at AB9C28
+AB92CC|15|
+# exit 16: fall at AB9C34
+AB92CC|16|
+# exit 17: fall at AB9C78, cannot be told apart from other paths
+AB92CC|17|
+# exit 18: fall at AB9C9C, cannot be told apart from other paths
+AB92CC|18|
+
+# engine::actor::ActorMgr::requestCreateActorSync  (12A8B44)
+# exit 1: branch at 12A913C
+12A8B44|1|
+# exit 2: branch at 12A9198
+12A8B44|2|
+# exit 3: branch at 12A9198
+12A8B44|3|
+# exit 4: fall at 12A919C
+12A8B44|4|
+# exit 5: branch at 12A91AC
+12A8B44|5|
+# exit 6: branch at 12A91AC
+12A8B44|6|
+# exit 7: branch at 12A91B4
+12A8B44|7|
+
+# game::scene::component::LimiterActorCountMgr::registerActor  (1406788)
+# exit 1: branch at 1406788
+1406788|1|
+
+# shaft::baseproc::BaseProc::initialize  (7FD750)
+# exit 1: branch at 7FD784
+7FD750|1|
+# exit 2: branch at 7FD984
+7FD750|2|
+# exit 3: branch at 7FD984
+7FD750|3|
+# exit 4: branch at 7FD9D0
+7FD750|4|
+# exit 5: branch at 7FD9D0
+7FD750|5|
+# exit 6: branch at 7FD9E0
+7FD750|6|
+# exit 7: branch at 7FD9E0
+7FD750|7|
+
+# engine::actor::ActorBase::initialize  (D2BA4C)
+# exit 1: branch at D2BA88
+D2BA4C|1|
+# exit 2: branch at D2C014
+D2BA4C|2|
+# exit 3: branch at D2C058
+D2BA4C|3|
+# exit 4: branch at D2C058
+D2BA4C|4|
+# exit 5: fall at D2C0D8, cannot be told apart from other paths
+D2BA4C|5|
+
+# engine::actor::ActorInfo::loadActorParam  (ABF20C)
+# exit 1: branch at ABF2A0
+ABF20C|1|
+# exit 2: branch at ABF2A8
+ABF20C|2|
+
+# engine::actor::ActorBase::initializeActor_  (E58CE0)
+# exit 1: branch at E58D08
+E58CE0|1|
+# exit 2: branch at E58D10
+E58CE0|2|
+# exit 3: branch at E58E94
+E58CE0|3|
+# exit 4: branch at E58E9C
+E58CE0|4|
+# exit 5: branch at E59DD4
+E58CE0|5|
+# exit 6: branch at E59DEC
+E58CE0|6|
+
+# engine::component::GameParameterTable::loadComponents  (E89018)
+# exit 1: branch at E8904C
+E89018|1|
+# exit 2: branch at E89054
+E89018|2|
+# exit 3: branch at E8923C
+E89018|3|
+# exit 4: branch at E89298
+E89018|4|
+
+# engine::component::LODComponent::postInitialize  (A2A604)
+# exit 1: branch at A2A69C
+A2A604|1|
+# exit 2: branch at A2A6A4
+A2A604|2|
+
+# engine::ai::AIControllerSet::initialize  (7A3DC0)
+# exit 1: branch at 7A3DE8
+7A3DC0|1|
+# exit 2: branch at 7A4AAC
+7A3DC0|2|
+# exit 3: branch at 7A4E00
+7A3DC0|3|
+# exit 4: branch at 7A4EB0
+7A3DC0|4|
+# exit 5: branch at 7A4EB0
+7A3DC0|5|
+
+# engine::component::AIComponent::postInitialize  (245BEA4)
+# exit 1: branch at 245BFC4
+245BEA4|1|
+# exit 2: branch at 245BFCC
+245BEA4|2|
+# exit 3: branch at 245C1D0
+245BEA4|3|
+
+# engine::component::PhysicsComponent::initialize  (78B8E8)
+# exit 1: branch at 78B9A8
+78B8E8|1|
+# exit 2: fall at 78B9F4
+78B8E8|2|
+# exit 3: fall at 78BA68, cannot be told apart from other paths
+78B8E8|3|
+
+# engine::component::PhysicsComponent::postInitialize  (70775C)
+# exit 1: branch at 707788
+70775C|1|
+# exit 2: branch at 707790
+70775C|2|
+# exit 3: branch at 707914
+70775C|3|
+# exit 4: branch at 7079F8
+70775C|4|
+# exit 5: branch at 707AAC
+70775C|5|
+
+# phive::CreateControllerSetConfig  (707F54)
+# exit 1: shared at 70803C, cannot be told apart from other paths
+707F54|1|
+# exit 2: branch at 70806C
+707F54|2|
+
+# phive::ControllerSetConfig::initialize  (70852C)
+# exit 1: branch at 7085EC
+70852C|1|
+# exit 2: branch at 7085F4
+70852C|2|
+# exit 3: branch at 70A1A8
+70852C|3|
+# exit 4: branch at 70A1B0
+70852C|4|
+# exit 5: branch at 70BE24
+70852C|5|one of the controller set files in the config's list did not load (its resource slot is empty) or came back with parameter entries it should not have; either clears the "everything loaded" flag and the whole config is rejected
+# exit 6: branch at 70CFC0
+70852C|6|
+# exit 7: branch at 70D3AC
+70852C|7|
+# exit 8: branch at 70D3B4
+70852C|8|
+# exit 9: branch at 70D7CC
+70852C|9|
+# exit 10: branch at 70D820
+70852C|10|
+# exit 11: branch at 70D8A0
+70852C|11|
+# exit 12: branch at 70D8A8
+70852C|12|
+# exit 13: branch at 70D9C0
+70852C|13|
+# exit 14: branch at 70DA14
+70852C|14|
+# exit 15: branch at 70DA8C
+70852C|15|
+# exit 16: branch at 70DA94
+70852C|16|
+# exit 17: branch at 70DC6C
+70852C|17|
+
+# phive::CreateControllerSet  (708088)
+# exit 1: branch at 708154
+708088|1|
+# exit 2: branch at 708228
+708088|2|
+# exit 3: branch at 708384
+708088|3|
+
+# phive::ControllerSet::initialize  (70F50C)
+# exit 1: branch at 70F7CC
+70F50C|1|
+# exit 2: branch at 70FBB8
+70F50C|2|
+# exit 3: branch at 70FC4C
+70F50C|3|
+# exit 4: branch at 70FD30
+70F50C|4|
+# exit 5: branch at 70FE6C
+70F50C|5|
+# exit 6: branch at 7101A0
+70F50C|6|
+# exit 7: branch at 7101E8
+70F50C|7|
+# exit 8: branch at 71118C
+70F50C|8|
+# exit 9: branch at 713AFC
+70F50C|9|
+# exit 10: branch at 713C44
+70F50C|10|
+# exit 11: branch at 713CC8
+70F50C|11|
+# exit 12: branch at 714504
+70F50C|12|
+# exit 13: branch at 714B40
+70F50C|13|
+# exit 14: branch at 715C98
+70F50C|14|
+
+# phive::CreateRigidBodyControllerSensor  (717A44)
+# exit 1: shared at 717B78, cannot be told apart from other paths
+717A44|1|
+# exit 2: branch at 717C24
+717A44|2|
+
+# phive::CreateRigidBodyControllerEntity  (719028)
+# exit 1: shared at 71915C, cannot be told apart from other paths
+719028|1|
+# exit 2: branch at 719208
+719028|2|
+
+# phive::CreateRigidBodyEntity  (71D8CC)
+# exit 1: branch at 71D908
+71D8CC|1|
+# exit 2: branch at 71DAA4
+71D8CC|2|
+
+# phive::CreateRigidBodyEntityImpl  (71DCA0)
+# exit 1: branch at 71DCC0
+71DCA0|1|
+# exit 2: branch at 71DDA8
+71DCA0|2|
+# exit 3: branch at 71DDCC
+71DCA0|3|
+# exit 4: shared at 71DDE0, cannot be told apart from other paths
+71DCA0|4|
+# exit 5: branch at 71DE28
+71DCA0|5|
+# exit 6: fall at 71DE38, cannot be told apart from other paths
+71DCA0|6|
+
+# phive::CreateRigidBodySensor  (D13BC0)
+# exit 1: branch at D13BDC
+D13BC0|1|
+# exit 2: branch at D13BFC
+D13BC0|2|
+# exit 3: branch at D13F20
+D13BC0|3|
+# exit 4: fall at D13F30, cannot be told apart from other paths
+D13BC0|4|
+# exit 5: branch at D13F98
+D13BC0|5|
+# exit 6: shared at D13FAC, cannot be told apart from other paths
+D13BC0|6|
+
+# phive::CreateShapeMesh  (86EDCC)
+# exit 1: branch at 86EDE8
+86EDCC|1|
+# exit 2: branch at 86EDF4
+86EDCC|2|
+# exit 3: branch at 86EF20
+86EDCC|3|
+
+# phive::CreateShapeBox  (8727B4)
+# exit 1: branch at 872814
+8727B4|1|
+# exit 2: branch at 87284C
+8727B4|2|
+# exit 3: branch at 872888
+8727B4|3|
+# exit 4: branch at 8729C8
+8727B4|4|
+# exit 5: branch at 872A08
+8727B4|5|
+
+# phive::CreateShapeSphere  (DA047C)
+# exit 1: branch at DA049C
+DA047C|1|
+# exit 2: branch at DA04D4
+DA047C|2|
+# exit 3: branch at DA0510
+DA047C|3|
+# exit 4: branch at DA0610
+DA047C|4|
+# exit 5: branch at DA0658
+DA047C|5|
+
+# phive::CreateShapeCapsule  (CF19B0)
+# exit 1: branch at CF19D0
+CF19B0|1|
+# exit 2: branch at CF1A08
+CF19B0|2|
+# exit 3: branch at CF1A44
+CF19B0|3|
+# exit 4: branch at CF1B54
+CF19B0|4|
+# exit 5: branch at CF1B9C
+CF19B0|5|
+
+# phive::CreateShapeCylinder  (873004)
+# exit 1: branch at 873314
+873004|1|
+
+# phive::CreateShapeCompound  (7359FC)
+# exit 1: branch at 735A50
+7359FC|1|
+# exit 2: branch at 735B3C
+7359FC|2|
+# exit 3: branch at 735B84
+7359FC|3|
+
+# ares::ResourceBinder::tryLoadSync  (76F8F0)
+# exit 1: branch at 76F9D8
+76F8F0|1|
+# exit 2: branch at 76F9E8
+76F8F0|2|
+# exit 3: branch at 76F9F8
+76F8F0|3|
+# exit 4: branch at 76FA2C
+76F8F0|4|
+# exit 5: branch at 76FA34
+76F8F0|5|
+# exit 6: branch at 76FA3C
+76F8F0|6|
+# exit 7: branch at 76FA54
+76F8F0|7|
+# exit 8: branch at 76FA58
+76F8F0|8|
+# exit 9: branch at 76FB34
+76F8F0|9|
+# exit 10: branch at 76FB34
+76F8F0|10|
+# exit 11: branch at 76FC54
+76F8F0|11|
+# exit 12: branch at 76FC64
+76F8F0|12|
+# exit 13: branch at 76FC74
+76F8F0|13|
+# exit 14: branch at 76FC94
+76F8F0|14|
+# exit 15: branch at 76FC9C
+76F8F0|15|
+# exit 16: branch at 76FCA4
+76F8F0|16|
+# exit 17: branch at 76FCA4
+76F8F0|17|
+# exit 18: branch at 76FCBC
+76F8F0|18|
+# exit 19: branch at 76FCC0
+76F8F0|19|
+# exit 20: branch at 76FCD0
+76F8F0|20|
+# exit 21: branch at 76FCD0
+76F8F0|21|
+# exit 22: branch at 76FD6C
+76F8F0|22|
+# exit 23: branch at 76FD6C
+76F8F0|23|
+# exit 24: branch at 76FD88
+76F8F0|24|
+# exit 25: branch at 76FD88
+76F8F0|25|
+
+# ares::ResourceUnit::initializeResource  (798350)
+# exit 1: fall at 7985B8, cannot be told apart from other paths
+798350|1|
+# exit 2: shared at 7985BC, cannot be told apart from other paths
+798350|2|
+
+# engine::resource::ModelResource::postInitialize_  (D97B5C)
+# exit 1: branch at D983C4
+D97B5C|1|
+
+# engine::component::BlackboardComponent::postInitialize  (8874F0)
+# exit 1: branch at 88751C
+8874F0|1|
+# exit 2: branch at 8876C0
+8874F0|2|
+# exit 3: branch at 8876C8
+8874F0|3|
+
+# engine::component::ReactionComponent::postInitialize  (8E7F18)
+# exit 1: branch at 8E7FC0
+8E7F18|1|
+# exit 2: branch at 8E7FC8
+8E7F18|2|
+
+# engine::component::ASComponent::postInitialize  (906EEC)
+# exit 1: branch at 906FF8
+906EEC|1|
+# exit 2: branch at 907044
+906EEC|2|
+# exit 3: branch at 907050
+906EEC|3|
+# exit 4: branch at 907060
+906EEC|4|
+# exit 5: branch at 9070A4
+906EEC|5|
+# exit 6: shared at 907A5C, cannot be told apart from other paths
+906EEC|6|
+
+# game::component::MiasmaConversion::postInitialize  (CF3C00)
+# exit 1: branch at CF3C2C
+CF3C00|1|
+# exit 2: branch at CF3C34
+CF3C00|2|
+# exit 3: branch at CF3C3C
+CF3C00|3|
+
+# game::component::ChemicalArray::postInitialize  (D0D7E0)
+# exit 1: branch at D0D818
+D0D7E0|1|
+# exit 2: branch at D0D820
+D0D7E0|2|
+# exit 3: branch at D0D828
+D0D7E0|3|
+
+# game::component::XLinkArray::postInitialize  (D1AE50)
+# exit 1: branch at D1AE8C
+D1AE50|1|
+# exit 2: branch at D1AE94
+D1AE50|2|
+# exit 3: branch at D1AE9C
+D1AE50|3|
+
+# game::component::BSA::postInitialize  (D33728)
+# exit 1: branch at D33764
+D33728|1|
+# exit 2: branch at D3376C
+D33728|2|
+# exit 3: branch at D33774
+D33728|3|
+# exit 4: branch at D33A34
+D33728|4|
+# exit 5: branch at D33A98
+D33728|5|
+
+# game::component::AISchedule::postInitialize  (D3BDE4)
+# exit 1: branch at D3BE10
+D3BDE4|1|
+# exit 2: branch at D3BE18
+D3BDE4|2|
+# exit 3: branch at D3BE20
+D3BDE4|3|
+# exit 4: branch at D3BE30
+D3BDE4|4|
+
+# engine::component::AnimationComponent::initialize  (D550F0)
+# exit 1: branch at D55220
+D550F0|1|
+# exit 2: branch at D55228
+D550F0|2|
+
+# engine::component::XLinkComponent::postInitialize  (D75A44)
+# exit 1: branch at D75A6C
+D75A44|1|
+# exit 2: branch at D75B14
+D75A44|2|
+# exit 3: branch at D75B20
+D75A44|3|
+
+# game::component::AttentionSender::postInitialize  (D7B144)
+# exit 1: branch at D7B178
+D7B144|1|
+# exit 2: branch at D7B184
+D7B144|2|
+# exit 3: branch at D7B18C
+D7B144|3|
+# exit 4: branch at D7B3D0
+D7B144|4|
+# exit 5: branch at D7B4BC
+D7B144|5|
+# exit 6: branch at D7B670
+D7B144|6|
+
+# game::component::PerceptionReceiver::postInitialize  (D80854)
+# exit 1: branch at D8088C
+D80854|1|
+# exit 2: branch at D80894
+D80854|2|
+# exit 3: branch at D8089C
+D80854|3|
+
+# game::component::NavMeshObject::postInitialize  (D8B9B8)
+# exit 1: branch at D8B9EC
+D8B9B8|1|
+# exit 2: branch at D8B9F4
+D8B9B8|2|
+# exit 3: branch at D8B9FC
+D8B9B8|3|
+# exit 4: branch at D8BAE8
+D8B9B8|4|
+# exit 5: branch at D8BB44
+D8B9B8|5|
+# exit 6: branch at D8BB4C
+D8B9B8|6|
+# exit 7: branch at D8BB80
+D8B9B8|7|
+# exit 8: branch at D8BBBC
+D8B9B8|8|
+
+# game::component::BSA::initialize  (D8DF3C)
+# exit 1: branch at D8DF74
+D8DF3C|1|
+# exit 2: branch at D8DF7C
+D8DF3C|2|
+# exit 3: branch at D8DF84
+D8DF3C|3|
+# exit 4: branch at D8E050
+D8DF3C|4|
+# exit 5: branch at D8E074
+D8DF3C|5|
+# exit 6: branch at D8E088
+D8DF3C|6|
+# exit 7: branch at D8E09C
+D8DF3C|7|
+
+# game::component::SensorHit::postInitialize  (D92A44)
+# exit 1: branch at D92A78
+D92A44|1|
+# exit 2: branch at D92A80
+D92A44|2|
+# exit 3: branch at D92A88
+D92A44|3|
+# exit 4: branch at D92A90
+D92A44|4|
+# exit 5: branch at D92A98
+D92A44|5|
+# exit 6: branch at D92AA4
+D92A44|6|
+# exit 7: branch at D93250
+D92A44|7|
+# exit 8: branch at D93250
+D92A44|8|
+
+# game::component::GameModelController::postInitialize  (D98590)
+# exit 1: branch at D985CC
+D98590|1|
+# exit 2: branch at D985D4
+D98590|2|
+# exit 3: branch at D985DC
+D98590|3|
+
+# game::component::Terrain::postInitialize  (DC7804)
+# exit 1: branch at DC7834
+DC7804|1|
+# exit 2: branch at DC783C
+DC7804|2|
+# exit 3: branch at DC7844
+DC7804|3|
+# exit 4: branch at DC78D4
+DC7804|4|
+# exit 5: fall at DC7DD8, cannot be told apart from other paths
+DC7804|5|
+
+# game::component::PerceptionEmitter::postInitialize  (DE3D58)
+# exit 1: branch at DE3D8C
+DE3D58|1|
+# exit 2: branch at DE3D94
+DE3D58|2|
+# exit 3: branch at DE3D9C
+DE3D58|3|
+# exit 4: branch at DE3E60
+DE3D58|4|
+# exit 5: branch at DE3EFC
+DE3D58|5|
+# exit 6: branch at DE3F04
+DE3D58|6|
+# exit 7: branch at DE3F0C
+DE3D58|7|
+# exit 8: branch at DE404C
+DE3D58|8|
+
+# engine::component::ELinkComponent::initialize  (DEBB50)
+# exit 1: branch at DEBDD8
+DEBB50|1|
+# exit 2: branch at DEBDD8
+DEBB50|2|
+# exit 3: branch at DEBE1C
+DEBB50|3|
+# exit 4: branch at DEBE1C
+DEBB50|4|
+# exit 5: branch at DEC560
+DEBB50|5|
+# exit 6: branch at DEC560
+DEBB50|6|
+
+# game::component::GameComponentBase::postInitialize  (DFD7CC)
+# exit 1: branch at DFD7DC
+DFD7CC|1|
+# exit 2: branch at DFD7E4
+DFD7CC|2|
+
+# game::component::SameBoneModelBind::postInitialize  (E45B54)
+# exit 1: branch at E45B7C
+E45B54|1|
+# exit 2: branch at E45B84
+E45B54|2|
+# exit 3: branch at E45B8C
+E45B54|3|
+# exit 4: branch at E45B9C
+E45B54|4|
+
+# engine::component::ModelBindComponent::postInitialize  (E45CF4)
+# exit 1: branch at E45D0C
+E45CF4|1|
+# exit 2: branch at E45D14
+E45CF4|2|
+
+# game::component::Chemical::postInitialize  (E52994)
+# exit 1: branch at E529C4
+E52994|1|
+# exit 2: branch at E529CC
+E52994|2|
+# exit 3: branch at E52A30
+E52994|3|
+
+# game::component::GeneralCounter::postInitialize  (E60224)
+# exit 1: branch at E6025C
+E60224|1|
+# exit 2: branch at E60264
+E60224|2|
+# exit 3: branch at E6026C
+E60224|3|
+
+# game::component::ComponentUMii::initialize  (E91DCC)
+# exit 1: branch at E91F94
+E91DCC|1|
+# exit 2: branch at E92560
+E91DCC|2|
+# exit 3: shared at E92780, cannot be told apart from other paths
+E91DCC|3|
+
+# game::component::Life::postInitialize  (F1187C)
+# exit 1: branch at F118B8
+F1187C|1|
+# exit 2: branch at F118C0
+F1187C|2|
+# exit 3: branch at F118C8
+F1187C|3|
+# exit 4: branch at F11954
+F1187C|4|
+# exit 5: branch at F11AA8
+F1187C|5|
+# exit 6: branch at F11AB0
+F1187C|6|
+# exit 7: branch at F1223C
+F1187C|7|
+# exit 8: branch at F12244
+F1187C|8|
+# exit 9: branch at F12254
+F1187C|9|
+# exit 10: branch at F1225C
+F1187C|10|
+# exit 11: branch at F12270
+F1187C|11|
+# exit 12: branch at F12278
+F1187C|12|
+# exit 13: fall at F125A0, cannot be told apart from other paths
+F1187C|13|
+# exit 14: shared at F125B0, cannot be told apart from other paths
+F1187C|14|
+# exit 15: fall at F125C4, cannot be told apart from other paths
+F1187C|15|
+
+# engine::component::ModelComponent::initialize  (F239B0)
+# exit 1: branch at F23AE0
+F239B0|1|
+# exit 2: branch at F23AE8
+F239B0|2|
+# exit 3: branch at F23B14
+F239B0|3|
+# exit 4: branch at F23FB8
+F239B0|4|
+# exit 5: branch at F242F4
+F239B0|5|
+# exit 6: branch at F24304
+F239B0|6|
+# exit 7: branch at F243F8
+F239B0|7|
+
+# game::component::Chemical::initialize  (F3B520)
+# exit 1: branch at F3B554
+F3B520|1|
+# exit 2: branch at F3B55C
+F3B520|2|
+# exit 3: branch at F3B564
+F3B520|3|
+# exit 4: branch at F3B600
+F3B520|4|
+# exit 5: branch at F3B608
+F3B520|5|
+
+# game::component::ActorHolder::postInitialize  (F3DC28)
+# exit 1: branch at F3DC60
+F3DC28|1|
+# exit 2: branch at F3DC68
+F3DC28|2|
+# exit 3: branch at F3DC70
+F3DC28|3|
+# exit 4: branch at F3DD00
+F3DC28|4|
+# exit 5: branch at F3E0AC
+F3DC28|5|
+# exit 6: branch at F3E0E8
+F3DC28|6|
+# exit 7: branch at F3E404
+F3DC28|7|
+# exit 8: branch at F3E5B8
+F3DC28|8|
+# exit 9: branch at F3E5B8
+F3DC28|9|
+
+# game::component::Drop::initialize  (F4F068)
+# exit 1: branch at F4F0A0
+F4F068|1|
+# exit 2: branch at F4F0A8
+F4F068|2|
+# exit 3: branch at F4F0B0
+F4F068|3|
+# exit 4: branch at F4F140
+F4F068|4|
+# exit 5: branch at F4F160
+F4F068|5|
+# exit 6: branch at F4F19C
+F4F068|6|
+# exit 7: branch at F4F3B4
+F4F068|7|
+# exit 8: branch at F4F3F0
+F4F068|8|
+# exit 9: branch at F4F50C
+F4F068|9|
+# exit 10: branch at F4F514
+F4F068|10|
+# exit 11: branch at F4F548
+F4F068|11|
+# exit 12: branch at F4F588
+F4F068|12|
+# exit 13: branch at F4FAF0
+F4F068|13|
+# exit 14: fall at F4FB08, cannot be told apart from other paths
+F4F068|14|
+# exit 15: branch at F4FB4C
+F4F068|15|
+# exit 16: branch at F4FB74
+F4F068|16|
+
+# game::component::GamePhysics::postInitialize  (F82D90)
+# exit 1: branch at F82DCC
+F82D90|1|
+# exit 2: branch at F82DD4
+F82D90|2|
+# exit 3: branch at F82DDC
+F82D90|3|
+# exit 4: branch at F830A8
+F82D90|4|
+# exit 5: branch at F83AC0
+F82D90|5|
+# exit 6: branch at F83D3C
+F82D90|6|
+# exit 7: branch at F83E84
+F82D90|7|
+# exit 8: branch at F844A4
+F82D90|8|
+# exit 9: branch at F844A4
+F82D90|9|
+# exit 10: branch at F84538
+F82D90|10|
+# exit 11: branch at F84538
+F82D90|11|
+
+# game::component::Drop::postInitialize  (F9695C)
+# exit 1: branch at F96994
+F9695C|1|
+# exit 2: branch at F9699C
+F9695C|2|
+# exit 3: branch at F969A4
+F9695C|3|
+
+# game::component::ModelArray::postInitialize  (F9FED8)
+# exit 1: branch at F9FF1C
+F9FED8|1|
+# exit 2: branch at F9FF24
+F9FED8|2|
+# exit 3: branch at F9FF2C
+F9FED8|3|
+# exit 4: branch at F9FF48
+F9FED8|4|
+# exit 5: branch at F9FF70
+F9FED8|5|
+# exit 6: branch at F9FF78
+F9FED8|6|
+# exit 7: branch at F9FFB4
+F9FED8|7|
+# exit 8: branch at FA009C
+F9FED8|8|
+# exit 9: branch at FA00B0
+F9FED8|9|
+# exit 10: branch at FA00E4
+F9FED8|10|
+# exit 11: branch at FA19B0
+F9FED8|11|
+# exit 12: branch at FA19B0
+F9FED8|12|
+# exit 13: branch at FA1B2C
+F9FED8|13|
+# exit 14: branch at FA1B5C
+F9FED8|14|
+# exit 15: branch at FA1B8C
+F9FED8|15|
+
+# game::component::Shootable::postInitialize  (FAC184)
+# exit 1: branch at FAC1BC
+FAC184|1|
+# exit 2: branch at FAC1C4
+FAC184|2|
+# exit 3: branch at FAC1CC
+FAC184|3|
+
+# game::component::SoundFootStep::postInitialize  (FAEC24)
+# exit 1: branch at FAEC58
+FAEC24|1|
+# exit 2: branch at FAEC60
+FAEC24|2|
+# exit 3: branch at FAEC6C
+FAEC24|3|
+# exit 4: branch at FAED08
+FAEC24|4|
+# exit 5: branch at FAED10
+FAEC24|5|
+# exit 6: fall at FAF3DC, cannot be told apart from other paths
+FAEC24|6|
+
+# game::component::ActorMerge::postInitialize  (FB5204)
+# exit 1: branch at FB5240
+FB5204|1|
+# exit 2: branch at FB5248
+FB5204|2|
+# exit 3: branch at FB5250
+FB5204|3|
+# exit 4: fall at FB5964, cannot be told apart from other paths
+FB5204|4|
+# exit 5: branch at FB60B0
+FB5204|5|
+# exit 6: branch at FB60B8
+FB5204|6|
+# exit 7: branch at FB60C0
+FB5204|7|
+# exit 8: branch at FB60D4
+FB5204|8|
+# exit 9: branch at FB60DC
+FB5204|9|
+
+# game::component::GameBalanceClient::postInitialize  (FB65EC)
+# exit 1: branch at FB6614
+FB65EC|1|
+# exit 2: branch at FB66DC
+FB65EC|2|
+
+# game::component::GameBalance::postInitialize  (FB6D98)
+# exit 1: branch at FB6DC4
+FB6D98|1|
+# exit 2: branch at FB6DCC
+FB6D98|2|
+# exit 3: branch at FB6DD4
+FB6D98|3|
+
+# game::component::GameReactionController::postInitialize  (FCBDD0)
+# exit 1: branch at FCBE08
+FCBDD0|1|
+# exit 2: branch at FCBE10
+FCBDD0|2|
+# exit 3: branch at FCBE18
+FCBDD0|3|
+
+# game::component::Cave::postInitialize  (FD2794)
+# exit 1: branch at FD27C4
+FD2794|1|
+# exit 2: branch at FD27CC
+FD2794|2|
+
+# engine::component::AnimationComponent::postInitialize  (FD8DA8)
+# exit 1: branch at FD8F14
+FD8DA8|1|
+# exit 2: branch at FD9474
+FD8DA8|2|
+# exit 3: branch at FD9568
+FD8DA8|3|
+# exit 4: branch at FD9568
+FD8DA8|4|
+
+# game::component::AnimeDrivenMove::postInitialize  (FF64C0)
+# exit 1: branch at FF64EC
+FF64C0|1|
+# exit 2: branch at FF64F4
+FF64C0|2|
+# exit 3: branch at FF64FC
+FF64C0|3|
+# exit 4: branch at FF6558
+FF64C0|4|
+# exit 5: branch at FF6560
+FF64C0|5|
+# exit 6: branch at FF658C
+FF64C0|6|
+# exit 7: branch at FF6594
+FF64C0|7|
+# exit 8: branch at FF65D0
+FF64C0|8|
+# exit 9: branch at FF65DC
+FF64C0|9|
+# exit 10: branch at FF65E4
+FF64C0|10|
+# exit 11: branch at FF65EC
+FF64C0|11|
+# exit 12: branch at FF65F4
+FF64C0|12|
+
+# game::component::Shooter::postInitialize  (1017B54)
+# exit 1: branch at 1017B8C
+1017B54|1|
+# exit 2: branch at 1017B94
+1017B54|2|
+# exit 3: branch at 1017B9C
+1017B54|3|
+# exit 4: branch at 1018150
+1017B54|4|
+
+# game::component::PathFinding::postInitialize  (101A900)
+# exit 1: branch at 101A938
+101A900|1|
+# exit 2: branch at 101A940
+101A900|2|
+# exit 3: branch at 101A95C
+101A900|3|
+# exit 4: branch at 101A964
+101A900|4|
+# exit 5: branch at 101A998
+101A900|5|
+# exit 6: branch at 101A9C8
+101A900|6|
+
+# game::component::SweepOut::postInitialize  (1036D18)
+# exit 1: branch at 1036D4C
+1036D18|1|
+# exit 2: branch at 1036D54
+1036D18|2|
+# exit 3: branch at 1036D5C
+1036D18|3|
+# exit 4: branch at 1036DF0
+1036D18|4|
+
+# game::component::Weapon::postInitialize  (1058720)
+# exit 1: branch at 1058744
+1058720|1|
+# exit 2: branch at 105874C
+1058720|2|
+# exit 3: branch at 1058780
+1058720|3|
+# exit 4: branch at 10587A8
+1058720|4|
+# exit 5: branch at 10587E4
+1058720|5|
+# exit 6: branch at 10587E4
+1058720|6|
+# exit 7: branch at 1058BA8
+1058720|7|
+# exit 8: branch at 1058BA8
+1058720|8|
+
+# game::component::DynamicEquipment::postInitialize  (10595EC)
+# exit 1: branch at 105961C
+10595EC|1|
+# exit 2: branch at 10597A0
+10595EC|2|
+# exit 3: branch at 10597A8
+10595EC|3|
+# exit 4: branch at 10597D4
+10595EC|4|
+# exit 5: branch at 10597DC
+10595EC|5|
+# exit 6: branch at 1059828
+10595EC|6|
+# exit 7: branch at 1059834
+10595EC|7|
+# exit 8: branch at 105983C
+10595EC|8|
+
+# game::component::EquipmentBase::postInitialize  (105BD44)
+# exit 1: branch at 105BD74
+105BD44|1|
+# exit 2: branch at 105BD7C
+105BD44|2|
+# exit 3: branch at 105BD84
+105BD44|3|
+
+# game::component::ColorVariation::postInitialize  (105E664)
+# exit 1: branch at 105E694
+105E664|1|
+# exit 2: branch at 105E69C
+105E664|2|
+# exit 3: branch at 105E6A4
+105E664|3|
+# exit 4: branch at 105E6D0
+105E664|4|
+# exit 5: branch at 105E6E4
+105E664|5|
+# exit 6: branch at 105E724
+105E664|6|
+
+# game::component::ComponentUMii::postInitialize  (1075264)
+# exit 1: branch at 1075290
+1075264|1|
+# exit 2: branch at 10752AC
+1075264|2|
+# exit 3: branch at 10752B4
+1075264|3|
+# exit 4: branch at 10752BC
+1075264|4|
+# exit 5: branch at 1075764
+1075264|5|
+# exit 6: branch at 107577C
+1075264|6|
+# exit 7: branch at 107578C
+1075264|7|
+# exit 8: branch at 107581C
+1075264|8|
+# exit 9: branch at 1075824
+1075264|9|
+# exit 10: branch at 1075834
+1075264|10|
+# exit 11: branch at 1075848
+1075264|11|
+# exit 12: branch at 1075E58
+1075264|12|
+# exit 13: branch at 10760C8
+1075264|13|
+# exit 14: branch at 10760C8
+1075264|14|
+# exit 15: fall at 10760D0, cannot be told apart from other paths
+1075264|15|
+
+# game::component::Destructible::postInitialize  (107A610)
+# exit 1: branch at 107A63C
+107A610|1|
+# exit 2: branch at 107A644
+107A610|2|
+# exit 3: branch at 107A64C
+107A610|3|
+# exit 4: branch at 107A654
+107A610|4|
+# exit 5: branch at 107A65C
+107A610|5|
+# exit 6: branch at 107A664
+107A610|6|
+# exit 7: branch at 107A6C0
+107A610|7|
+# exit 8: branch at 107A6D0
+107A610|8|
+# exit 9: branch at 107A6D8
+107A610|9|
+# exit 10: branch at 107A6E4
+107A610|10|
+# exit 11: branch at 107A6E8
+107A610|11|
+# exit 12: branch at 107A720
+107A610|12|
+# exit 13: branch at 107A728
+107A610|13|
+# exit 14: branch at 107A77C
+107A610|14|
+
+# game::component::Player::postInitialize  (1085CB0)
+# exit 1: branch at 1085EE4
+1085CB0|1|
+
+# game::component::ActorPositionCalculator::postInitialize  (10A6674)
+# exit 1: branch at 10A66AC
+10A6674|1|
+# exit 2: branch at 10A66AC
+10A6674|2|
+# exit 3: branch at 10A66B4
+10A6674|3|
+# exit 4: branch at 10A66B4
+10A6674|4|
+# exit 5: branch at 10A66BC
+10A6674|5|
+# exit 6: branch at 10A66BC
+10A6674|6|
+# exit 7: branch at 10A66E8
+10A6674|7|
+# exit 8: branch at 10A66FC
+10A6674|8|
+# exit 9: branch at 10A6740
+10A6674|9|
+# exit 10: branch at 10A6794
+10A6674|10|
+
+# game::component::GameBalanceClient::initialize  (10AF910)
+# exit 1: branch at 10AF940
+10AF910|1|
+# exit 2: branch at 10AF948
+10AF910|2|
+# exit 3: branch at 10AF950
+10AF910|3|
+# exit 4: branch at 10AFB24
+10AF910|4|
+
+# game::component::Target::postInitialize  (10B6C74)
+# exit 1: branch at 10B6CA4
+10B6C74|1|
+# exit 2: branch at 10B6CAC
+10B6C74|2|
+# exit 3: branch at 10B6CB4
+10B6C74|3|
+
+# game::component::Shop::postInitialize  (10D57C4)
+# exit 1: branch at 10D57FC
+10D57C4|1|
+# exit 2: branch at 10D5804
+10D57C4|2|
+
+# game::component::Condition::postInitialize  (10DAB18)
+# exit 1: branch at 10DAB4C
+10DAB18|1|
+# exit 2: branch at 10DAB54
+10DAB18|2|
+# exit 3: branch at 10DAB5C
+10DAB18|3|
+# exit 4: branch at 10DABF8
+10DAB18|4|
+# exit 5: branch at 10DAC00
+10DAB18|5|
+
+# game::component::Shield::postInitialize  (10DE5E0)
+# exit 1: branch at 10DE600
+10DE5E0|1|
+# exit 2: branch at 10DE608
+10DE5E0|2|
+# exit 3: branch at 10DE610
+10DE5E0|3|
+# exit 4: branch at 10DE63C
+10DE5E0|4|
+# exit 5: branch at 10DE644
+10DE5E0|5|
+# exit 6: branch at 10DE680
+10DE5E0|6|
+
+# game::component::WorldInfo::postInitialize  (10EBBF4)
+# exit 1: branch at 10EBC24
+10EBBF4|1|
+# exit 2: branch at 10EBC2C
+10EBBF4|2|
+# exit 3: branch at 10EBC34
+10EBBF4|3|
+# exit 4: branch at 10EBCD0
+10EBBF4|4|
+# exit 5: branch at 10EBCD8
+10EBBF4|5|
+
+# game::component::FittingModelToSlope::postInitialize  (1106214)
+# exit 1: branch at 1106298
+1106214|1|
+# exit 2: branch at 1106298
+1106214|2|
+# exit 3: branch at 11062A0
+1106214|3|
+# exit 4: branch at 11062A0
+1106214|4|
+# exit 5: branch at 11062D0
+1106214|5|
+# exit 6: branch at 11062FC
+1106214|6|
+# exit 7: branch at 11062FC
+1106214|7|
+# exit 8: branch at 1106338
+1106214|8|
+# exit 9: branch at 110634C
+1106214|9|
+# exit 10: branch at 1106354
+1106214|10|
+# exit 11: branch at 110635C
+1106214|11|
+
+# game::component::SoundFlap::postInitialize  (11151D4)
+# exit 1: branch at 111520C
+11151D4|1|
+# exit 2: branch at 1115214
+11151D4|2|
+# exit 3: branch at 111521C
+11151D4|3|
+# exit 4: branch at 1115224
+11151D4|4|
+# exit 5: branch at 111522C
+11151D4|5|
+# exit 6: branch at 1115234
+11151D4|6|
+# exit 7: branch at 111523C
+11151D4|7|
+# exit 8: branch at 1115244
+11151D4|8|
+# exit 9: branch at 1115280
+11151D4|9|
+# exit 10: branch at 1115288
+11151D4|10|
+# exit 11: branch at 111529C
+11151D4|11|
+# exit 12: branch at 111534C
+11151D4|12|
+# exit 13: branch at 111537C
+11151D4|13|
+# exit 14: branch at 1115384
+11151D4|14|
+# exit 15: branch at 11154A4
+11151D4|15|
+# exit 16: branch at 11154B8
+11151D4|16|
+# exit 17: branch at 11154C8
+11151D4|17|
+# exit 18: branch at 1115570
+11151D4|18|
+# exit 19: branch at 111557C
+11151D4|19|
+# exit 20: branch at 1115590
+11151D4|20|
+# exit 21: branch at 111559C
+11151D4|21|
+
+# game::component::SpecialPowerReceiver::postInitialize  (1117BDC)
+# exit 1: branch at 1117C0C
+1117BDC|1|
+# exit 2: branch at 1117C14
+1117BDC|2|
+# exit 3: branch at 1117C1C
+1117BDC|3|
+# exit 4: branch at 1117C48
+1117BDC|4|
+# exit 5: branch at 1117C6C
+1117BDC|5|
+# exit 6: branch at 1117CA8
+1117BDC|6|
+# exit 7: fall at 1118DE0, cannot be told apart from other paths
+1117BDC|7|
+# exit 8: shared at 1118DE4, cannot be told apart from other paths
+1117BDC|8|
+
+# game::component::Ridable::postInitialize  (111B558)
+# exit 1: branch at 111B590
+111B558|1|
+# exit 2: branch at 111B598
+111B558|2|
+# exit 3: branch at 111B5A0
+111B558|3|
+# exit 4: branch at 111B5FC
+111B558|4|
+# exit 5: branch at 111B604
+111B558|5|
+# exit 6: branch at 111B630
+111B558|6|
+# exit 7: branch at 111B638
+111B558|7|
+# exit 8: branch at 111B674
+111B558|8|
+# exit 9: branch at 111B690
+111B558|9|
+# exit 10: branch at 111BA40
+111B558|10|
+# exit 11: branch at 111BA4C
+111B558|11|
+# exit 12: branch at 111BA7C
+111B558|12|
+# exit 13: branch at 111BA88
+111B558|13|
+
+# game::component::Buff::postInitialize  (111C400)
+# exit 1: branch at 111C420
+111C400|1|
+# exit 2: branch at 111C428
+111C400|2|
+# exit 3: branch at 111C430
+111C400|3|
+
+# game::component::Horse::postInitialize  (114F748)
+# exit 1: branch at 114F788
+114F748|1|
+# exit 2: branch at 114F790
+114F748|2|
+# exit 3: branch at 114F798
+114F748|3|
+# exit 4: branch at 114F7C4
+114F748|4|
+# exit 5: branch at 114F7CC
+114F748|5|
+# exit 6: branch at 114F808
+114F748|6|
+
+# game::component::ExceptionalPhysics::postInitialize  (11730C0)
+# exit 1: branch at 11730F0
+11730C0|1|
+# exit 2: branch at 11730F0
+11730C0|2|
+# exit 3: branch at 11730F8
+11730C0|3|
+# exit 4: branch at 11730F8
+11730C0|4|
+# exit 5: branch at 1173100
+11730C0|5|
+# exit 6: branch at 1173100
+11730C0|6|
+# exit 7: branch at 117312C
+11730C0|7|
+# exit 8: branch at 117314C
+11730C0|8|
+# exit 9: branch at 117314C
+11730C0|9|
+# exit 10: branch at 1173188
+11730C0|10|
+# exit 11: branch at 117319C
+11730C0|11|
+# exit 12: shared at 11731B4, cannot be told apart from other paths
+11730C0|12|
+# exit 13: fall at 11731B4, cannot be told apart from other paths
+11730C0|13|
+
+# game::component::Lifter::postInitialize  (1174EE8)
+# exit 1: branch at 117517C
+1174EE8|1|
+
+# game::component::Dragon::postInitialize  (1179110)
+# exit 1: branch at 117913C
+1179110|1|
+# exit 2: branch at 1179444
+1179110|2|
+
+# game::component::EquipmentUser::postInitialize  (117AC64)
+# exit 1: branch at 117AC9C
+117AC64|1|
+# exit 2: branch at 117ACA4
+117AC64|2|
+# exit 3: branch at 117ACAC
+117AC64|3|
+
+# game::component::StaticEquipment::postInitialize  (118C6C0)
+# exit 1: branch at 118C6DC
+118C6C0|1|
+# exit 2: branch at 118C6E8
+118C6C0|2|
+# exit 3: branch at 118C6F0
+118C6C0|3|
+
+# game::component::PointLight::initialize  (1191CF4)
+# exit 1: branch at 1191D28
+1191CF4|1|
+# exit 2: branch at 1191D30
+1191CF4|2|
+# exit 3: branch at 1191D38
+1191CF4|3|
+# exit 4: branch at 1191DA0
+1191CF4|4|
+# exit 5: branch at 1191DA8
+1191CF4|5|
+
+# game::component::GameComponentBase::initialize  (1192E24)
+# exit 1: branch at 1192E30
+1192E24|1|
+# exit 2: branch at 1192E38
+1192E24|2|
+# exit 3: branch at 1192E40
+1192E24|3|
+
+# game::component::DynamicActorContainer::postInitialize  (1193CAC)
+# exit 1: branch at 1193CE8
+1193CAC|1|
+# exit 2: branch at 1193CF0
+1193CAC|2|
+# exit 3: branch at 1193CF8
+1193CAC|3|
+# exit 4: branch at 1193D00
+1193CAC|4|
+# exit 5: branch at 1193D0C
+1193CAC|5|
+# exit 6: branch at 1193D1C
+1193CAC|6|
+# exit 7: branch at 1193D8C
+1193CAC|7|
+# exit 8: branch at 1193D98
+1193CAC|8|
+# exit 9: branch at 1193DB4
+1193CAC|9|
+# exit 10: branch at 1193DD0
+1193CAC|10|
+# exit 11: branch at 1193DE8
+1193CAC|11|
+# exit 12: branch at 1193DF4
+1193CAC|12|
+# exit 13: branch at 1193E0C
+1193CAC|13|
+
+# game::component::TrolleyRail::postInitialize  (119A494)
+# exit 1: branch at 119A4B8
+119A494|1|
+# exit 2: branch at 119A4C0
+119A494|2|
+# exit 3: branch at 119A4C8
+119A494|3|
+# exit 4: branch at 119A4D0
+119A494|4|
+# exit 5: branch at 119A4FC
+119A494|5|
+# exit 6: branch at 119A518
+119A494|6|
+
+# game::component::Lumbered::postInitialize  (12057B4)
+# exit 1: branch at 12057EC
+12057B4|1|
+# exit 2: branch at 12057F4
+12057B4|2|
+# exit 3: branch at 12057FC
+12057B4|3|
+# exit 4: branch at 120588C
+12057B4|4|
+# exit 5: branch at 1205894
+12057B4|5|
+
+# engine::component::CameraComponent::postInitialize  (1252568)
+# exit 1: fall at 1252678, cannot be told apart from other paths
+1252568|1|
+# exit 2: shared at 125267C, cannot be told apart from other paths
+1252568|2|
+
+# game::component::ReplaceModel::postInitialize  (125880C)
+# exit 1: branch at 1258830
+125880C|1|
+# exit 2: branch at 125883C
+125880C|2|
+# exit 3: branch at 1258880
+125880C|3|
+# exit 4: branch at 1258888
+125880C|4|
+# exit 5: branch at 1258898
+125880C|5|
+# exit 6: branch at 1258960
+125880C|6|
+
+# game::component::AttentionReceiver::postInitialize  (12855D4)
+# exit 1: branch at 128560C
+12855D4|1|
+# exit 2: branch at 1285614
+12855D4|2|
+# exit 3: branch at 128561C
+12855D4|3|
+
+# game::component::Snapping::postInitialize  (12A1C28)
+# exit 1: branch at 12A1C48
+12A1C28|1|
+# exit 2: branch at 12A1C54
+12A1C28|2|
+# exit 3: branch at 12A1CD8
+12A1C28|3|
+# exit 4: branch at 12A1D08
+12A1C28|4|
+
+# game::component::GameListener::postInitialize  (12AE734)
+# exit 1: branch at 12AE758
+12AE734|1|
+# exit 2: branch at 12AE760
+12AE734|2|
+# exit 3: branch at 12AE768
+12AE734|3|
+# exit 4: branch at 12AE7A0
+12AE734|4|
+
+# game::component::Coupler::postInitialize  (12E53A8)
+# exit 1: branch at 12E53D4
+12E53A8|1|
+# exit 2: branch at 12E53E0
+12E53A8|2|
+# exit 3: branch at 12E5784
+12E53A8|3|
+# exit 4: branch at 12E578C
+12E53A8|4|
+# exit 5: branch at 12E5794
+12E53A8|5|
+# exit 6: branch at 12E579C
+12E53A8|6|
+
+# game::component::Quadruped::postInitialize  (12FC054)
+# exit 1: branch at 12FC0D8
+12FC054|1|
+# exit 2: branch at 12FC0E0
+12FC054|2|
+# exit 3: branch at 12FC110
+12FC054|3|
+# exit 4: branch at 12FC118
+12FC054|4|
+# exit 5: branch at 12FC154
+12FC054|5|
+# exit 6: branch at 12FC168
+12FC054|6|
+# exit 7: branch at 12FC170
+12FC054|7|
+# exit 8: branch at 12FC178
+12FC054|8|
+# exit 9: branch at 12FC548
+12FC054|9|
+
+# game::component::Rider::postInitialize  (13097B8)
+# exit 1: branch at 13097F4
+13097B8|1|
+# exit 2: branch at 13097FC
+13097B8|2|
+# exit 3: branch at 1309804
+13097B8|3|
+# exit 4: branch at 1309868
+13097B8|4|
+# exit 5: branch at 1309870
+13097B8|5|
+# exit 6: branch at 130989C
+13097B8|6|
+# exit 7: branch at 13098A4
+13097B8|7|
+# exit 8: branch at 13098EC
+13097B8|8|
+# exit 9: branch at 130A044
+13097B8|9|
+
+# game::component::PlacementMotion::postInitialize  (1312704)
+# exit 1: branch at 1312738
+1312704|1|
+# exit 2: branch at 1312740
+1312704|2|
+# exit 3: branch at 1312748
+1312704|3|
+# exit 4: branch at 1312774
+1312704|4|
+# exit 5: branch at 131277C
+1312704|5|
+# exit 6: branch at 13127B8
+1312704|6|
+
+# game::component::SwordBlur::postInitialize  (1313598)
+# exit 1: branch at 13135CC
+1313598|1|
+# exit 2: branch at 13135D4
+1313598|2|
+# exit 3: branch at 13135DC
+1313598|3|
+# exit 4: branch at 1313660
+1313598|4|
+# exit 5: branch at 1313668
+1313598|5|
+# exit 6: fall at 1313A0C, cannot be told apart from other paths
+1313598|6|
+
+# game::component::Attachment::postInitialize  (131B430)
+# exit 1: branch at 131B468
+131B430|1|
+# exit 2: branch at 131B470
+131B430|2|
+# exit 3: branch at 131B478
+131B430|3|
+# exit 4: branch at 131B4A4
+131B430|4|
+# exit 5: branch at 131B4AC
+131B430|5|
+# exit 6: branch at 131B4E8
+131B430|6|
+
+# game::component::ActiveCameraAlpha::postInitialize  (1571DC0)
+# exit 1: branch at 1571DF0
+1571DC0|1|
+# exit 2: branch at 1571DF8
+1571DC0|2|
+# exit 3: branch at 1571E00
+1571DC0|3|
+
+# game::component::ActorMerge::initialize  (157690C)
+# exit 1: branch at 1576930
+157690C|1|
+# exit 2: branch at 1576938
+157690C|2|
+
+# game::component::Affiliation::postInitialize  (15787A0)
+# exit 1: branch at 15787C8
+15787A0|1|
+# exit 2: branch at 15787D0
+15787A0|2|
+# exit 3: branch at 15787D8
+15787A0|3|
+
+# game::component::AreaRenderer::postInitialize  (157B24C)
+# exit 1: branch at 157B280
+157B24C|1|
+# exit 2: branch at 157B288
+157B24C|2|
+# exit 3: branch at 157B290
+157B24C|3|
+# exit 4: branch at 157B430
+157B24C|4|
+
+# game::component::ArmyManager::initialize  (157BDE0)
+# exit 1: branch at 157BE0C
+157BDE0|1|
+
+# game::component::ArmyManager::postInitialize  (157C3A0)
+# exit 1: branch at 157C3D4
+157C3A0|1|
+
+# game::component::AttentionSender::initialize  (1585C68)
+# exit 1: branch at 1585CA4
+1585C68|1|
+# exit 2: branch at 1585CAC
+1585C68|2|
+# exit 3: branch at 1585CB4
+1585C68|3|
+# exit 4: branch at 1585D64
+1585C68|4|
+# exit 5: branch at 1585DD8
+1585C68|5|
+
+# game::component::BokoblinBasket::postInitialize  (1589420)
+# exit 1: branch at 1589438
+1589420|1|
+
+# game::component::Capture::initialize  (158EBF8)
+# exit 1: branch at 158EC2C
+158EBF8|1|
+# exit 2: branch at 158EC34
+158EBF8|2|
+# exit 3: branch at 158EC3C
+158EBF8|3|
+
+# game::component::Capture::postInitialize  (158F718)
+# exit 1: branch at 158F750
+158F718|1|
+# exit 2: branch at 158F758
+158F718|2|
+# exit 3: branch at 158F760
+158F718|3|
+
+# game::component::Cave::initialize  (1590BA4)
+# exit 1: branch at 1590BD0
+1590BA4|1|
+# exit 2: branch at 1590BD8
+1590BA4|2|
+# exit 3: branch at 1590BE0
+1590BA4|3|
+
+# game::component::CaveEnvironment::postInitialize  (15911A4)
+# exit 1: branch at 15911F0
+15911A4|1|
+# exit 2: branch at 15911F8
+15911A4|2|
+# exit 3: branch at 1591200
+15911A4|3|
+# exit 4: branch at 159127C
+15911A4|4|
+# exit 5: branch at 15921C4
+15911A4|5|
+# exit 6: branch at 15921F4
+15911A4|6|
+# exit 7: branch at 1592230
+15911A4|7|
+
+# game::component::ChemicalEmitter::postInitialize  (1598D50)
+# exit 1: branch at 1598D6C
+1598D50|1|
+# exit 2: branch at 1598DC8
+1598D50|2|
+# exit 3: branch at 1598DD0
+1598D50|3|
+
+# game::component::CustomHouseControl::postInitialize  (159EC9C)
+# exit 1: branch at 159ECB0
+159EC9C|1|
+# exit 2: branch at 159ECBC
+159EC9C|2|
+
+# game::component::Death::initialize  (15A80BC)
+# exit 1: branch at 15A80F0
+15A80BC|1|
+# exit 2: branch at 15A80F8
+15A80BC|2|
+# exit 3: branch at 15A8100
+15A80BC|3|
+# exit 4: branch at 15A8128
+15A80BC|4|
+# exit 5: branch at 15A8130
+15A80BC|5|
+# exit 6: branch at 15A815C
+15A80BC|6|
+# exit 7: branch at 15A8164
+15A80BC|7|
+# exit 8: branch at 15A81A0
+15A80BC|8|
+
+# game::component::Death::postInitialize  (15A858C)
+# exit 1: branch at 15A85C0
+15A858C|1|
+# exit 2: branch at 15A85C8
+15A858C|2|
+# exit 3: branch at 15A85F4
+15A858C|3|
+# exit 4: branch at 15A85FC
+15A858C|4|
+# exit 5: branch at 15A8638
+15A858C|5|
+# exit 6: branch at 15A86D0
+15A858C|6|
+# exit 7: branch at 15A86D8
+15A858C|7|
+# exit 8: fall at 15A883C, cannot be told apart from other paths
+15A858C|8|
+
+# game::component::DuplicatedAS::postInitialize  (15B70B4)
+# exit 1: branch at 15B70D8
+15B70B4|1|
+# exit 2: branch at 15B70E4
+15B70B4|2|
+# exit 3: branch at 15B70F4
+15B70B4|3|
+# exit 4: branch at 15B7100
+15B70B4|4|
+# exit 5: branch at 15B7110
+15B70B4|5|
+
+# game::component::DuplicatedModel::postInitialize  (15B8028)
+# exit 1: branch at 15B8054
+15B8028|1|
+
+# game::component::DynamicNavMesh::postInitialize  (15CADE8)
+# exit 1: branch at 15CAE0C
+15CADE8|1|
+# exit 2: branch at 15CAE18
+15CADE8|2|
+# exit 3: branch at 15CAE50
+15CADE8|3|
+# exit 4: branch at 15CAE68
+15CADE8|4|
+# exit 5: branch at 15CAE74
+15CADE8|5|
+# exit 6: branch at 15CAE88
+15CADE8|6|
+# exit 7: branch at 15CAE94
+15CADE8|7|
+# exit 8: branch at 15CAE9C
+15CADE8|8|
+# exit 9: branch at 15CAF08
+15CADE8|9|
+# exit 10: branch at 15CAF14
+15CADE8|10|
+
+# game::component::EventColorVariation::postInitialize  (15D9EBC)
+# exit 1: branch at 15D9EF0
+15D9EBC|1|
+# exit 2: branch at 15D9EF8
+15D9EBC|2|
+# exit 3: branch at 15D9F00
+15D9EBC|3|
+# exit 4: branch at 15D9F84
+15D9EBC|4|
+# exit 5: branch at 15D9F8C
+15D9EBC|5|
+# exit 6: fall at 15DA050, cannot be told apart from other paths
+15D9EBC|6|
+
+# game::component::Fluid::postInitialize  (15DC820)
+# exit 1: branch at 15DC854
+15DC820|1|
+# exit 2: branch at 15DC8F0
+15DC820|2|
+# exit 3: branch at 15DC90C
+15DC820|3|
+# exit 4: branch at 15DC9F0
+15DC820|4|
+# exit 5: branch at 15DCA94
+15DC820|5|
+# exit 6: branch at 15DCAC0
+15DC820|6|
+# exit 7: branch at 15DCAF4
+15DC820|7|
+# exit 8: branch at 15DCBC0
+15DC820|8|
+# exit 9: branch at 15DCBE8
+15DC820|9|
+# exit 10: branch at 15DCDD8
+15DC820|10|
+
+# game::component::ForceNoHit::postInitialize  (15DDAD0)
+# exit 1: branch at 15DDB00
+15DDAD0|1|
+# exit 2: branch at 15DDB08
+15DDAD0|2|
+# exit 3: branch at 15DDB10
+15DDAD0|3|
+# exit 4: branch at 15DDB18
+15DDAD0|4|
+# exit 5: branch at 15DDB20
+15DDAD0|5|
+
+# game::component::GameCamera::initialize  (15DF38C)
+# exit 1: branch at 15DF4C4
+15DF38C|1|
+# exit 2: branch at 15DF4CC
+15DF38C|2|
+
+# game::component::GameModelController::initialize  (15E1708)
+# exit 1: branch at 15E1740
+15E1708|1|
+# exit 2: branch at 15E1748
+15E1708|2|
+
+# game::component::GelEnemy::postInitialize  (15EE514)
+# exit 1: branch at 15EE530
+15EE514|1|
+
+# game::component::GroundControl::initialize  (15F0A38)
+# exit 1: branch at 15F0A5C
+15F0A38|1|
+# exit 2: branch at 15F0A64
+15F0A38|2|
+
+# game::component::GroundControl::postInitialize  (15F0B84)
+# exit 1: branch at 15F0BA8
+15F0B84|1|
+# exit 2: branch at 15F0BB4
+15F0B84|2|
+# exit 3: branch at 15F0C2C
+15F0B84|3|
+# exit 4: branch at 15F0D78
+15F0B84|4|
+
+# game::component::KorokCarry::postInitialize  (15F700C)
+# exit 1: branch at 15F7030
+15F700C|1|
+# exit 2: branch at 15F7090
+15F700C|2|
+# exit 3: branch at 15F7098
+15F700C|3|
+
+# game::component::Life::initialize  (15F7D5C)
+# exit 1: branch at 15F7D94
+15F7D5C|1|
+# exit 2: branch at 15F7D9C
+15F7D5C|2|
+# exit 3: branch at 15F7DAC
+15F7D5C|3|
+# exit 4: branch at 15F7DD8
+15F7D5C|4|
+# exit 5: branch at 15F7DE0
+15F7D5C|5|
+# exit 6: branch at 15F7E1C
+15F7D5C|6|
+# exit 7: branch at 15F7E34
+15F7D5C|7|
+# exit 8: branch at 15F7FAC
+15F7D5C|8|
+# exit 9: branch at 15F82E4
+15F7D5C|9|
+# exit 10: branch at 15F82EC
+15F7D5C|10|
+
+# game::component::Liftable::postInitialize  (15F97E0)
+# exit 1: branch at 15F981C
+15F97E0|1|
+# exit 2: branch at 15F9824
+15F97E0|2|
+# exit 3: branch at 15F9850
+15F97E0|3|
+# exit 4: branch at 15F9880
+15F97E0|4|
+# exit 5: branch at 15F98C4
+15F97E0|5|
+
+# game::component::LightBall::postInitialize  (16006D0)
+# exit 1: branch at 16006F0
+16006D0|1|
+# exit 2: branch at 160074C
+16006D0|2|
+# exit 3: branch at 1600754
+16006D0|3|
+
+# game::component::ManafacturesIntegrator::postInitialize  (160851C)
+# exit 1: branch at 1608538
+160851C|1|
+# exit 2: branch at 1608548
+160851C|2|
+
+# game::component::MiasmaConversion::initialize  (1608D08)
+# exit 1: branch at 1608D34
+1608D08|1|
+# exit 2: branch at 1608D3C
+1608D08|2|
+# exit 3: branch at 1608D44
+1608D08|3|
+
+# game::component::MiasmaSwarm::postInitialize  (1609378)
+# exit 1: branch at 16093A8
+1609378|1|
+# exit 2: branch at 16093B4
+1609378|2|
+# exit 3: branch at 16093CC
+1609378|3|
+# exit 4: branch at 16093E8
+1609378|4|
+# exit 5: branch at 160947C
+1609378|5|
+# exit 6: branch at 160948C
+1609378|6|
+# exit 7: branch at 1609494
+1609378|7|
+# exit 8: branch at 16094A0
+1609378|8|
+
+# game::component::ModelDebug::postInitialize  (1614FB4)
+# exit 1: branch at 1614FD0
+1614FB4|1|
+# exit 2: branch at 1614FDC
+1614FB4|2|
+# exit 3: branch at 1614FE8
+1614FB4|3|
+# exit 4: branch at 161502C
+1614FB4|4|
+# exit 5: branch at 1615034
+1614FB4|5|
+
+# game::component::Nest::postInitialize  (16153C4)
+# exit 1: branch at 16153D8
+16153C4|1|
+
+# game::component::NpcMovementInfo::postInitialize  (16195B8)
+# exit 1: branch at 16195E4
+16195B8|1|
+# exit 2: branch at 16195EC
+16195B8|2|
+# exit 3: branch at 16195F4
+16195B8|3|
+# exit 4: branch at 1619690
+16195B8|4|
+# exit 5: branch at 1619698
+16195B8|5|
+# exit 6: fall at 1619704, cannot be told apart from other paths
+16195B8|6|
+
+# game::component::PointLight::postInitialize  (16255B4)
+# exit 1: branch at 16255EC
+16255B4|1|
+# exit 2: branch at 16255F4
+16255B4|2|
+# exit 3: branch at 16255FC
+16255B4|3|
+# exit 4: branch at 1625698
+16255B4|4|
+# exit 5: branch at 16256A0
+16255B4|5|
+
+# game::component::PosVibrateChecker::postInitialize  (1627D00)
+# exit 1: branch at 1627D30
+1627D00|1|
+# exit 2: branch at 1627D30
+1627D00|2|
+# exit 3: branch at 1627D38
+1627D00|3|
+# exit 4: branch at 1627D38
+1627D00|4|
+# exit 5: branch at 1627D40
+1627D00|5|
+# exit 6: branch at 1627D40
+1627D00|6|
+# exit 7: branch at 1627D6C
+1627D00|7|
+# exit 8: branch at 1627D8C
+1627D00|8|
+# exit 9: branch at 1627D8C
+1627D00|9|
+# exit 10: branch at 1627DC8
+1627D00|10|
+# exit 11: branch at 1627EA0
+1627D00|11|
+# exit 12: branch at 1627EAC
+1627D00|12|
+# exit 13: branch at 1627EB8
+1627D00|13|
+
+# game::component::PouchContent::postInitialize  (1628488)
+# exit 1: branch at 16284B4
+1628488|1|
+# exit 2: branch at 16284BC
+1628488|2|
+# exit 3: branch at 16284C4
+1628488|3|
+# exit 4: branch at 16284F0
+1628488|4|
+# exit 5: branch at 1628518
+1628488|5|
+# exit 6: branch at 1628558
+1628488|6|
+# exit 7: branch at 1628558
+1628488|7|
+# exit 8: branch at 16285E4
+1628488|8|
+# exit 9: branch at 16285E4
+1628488|9|
+
+# game::component::RepresentedByHeightMap::postInitialize  (1636440)
+# exit 1: branch at 1636468
+1636440|1|
+# exit 2: branch at 1636488
+1636440|2|
+# exit 3: branch at 1636500
+1636440|3|
+# exit 4: branch at 1636518
+1636440|4|
+# exit 5: branch at 163654C
+1636440|5|
+# exit 6: branch at 16365CC
+1636440|6|
+# exit 7: branch at 16365DC
+1636440|7|
+# exit 8: branch at 1636688
+1636440|8|
+# exit 9: branch at 163679C
+1636440|9|
+# exit 10: branch at 16367B0
+1636440|10|
+
+# game::component::SpFigure::postInitialize  (165844C)
+# exit 1: branch at 165847C
+165844C|1|
+# exit 2: branch at 1658D98
+165844C|2|
+# exit 3: branch at 1658E5C
+165844C|3|
+# exit 4: branch at 1658EA0
+165844C|4|
+
+# game::component::Swarm::postInitialize  (165F088)
+# exit 1: branch at 165F0B4
+165F088|1|
+# exit 2: branch at 165F0C0
+165F088|2|
+# exit 3: branch at 165F0D0
+165F088|3|
+# exit 4: branch at 165F0D8
+165F088|4|
+# exit 5: branch at 165F470
+165F088|5|
+
+# game::component::Terrain::initialize  (1669410)
+# exit 1: branch at 1669434
+1669410|1|
+# exit 2: branch at 166943C
+1669410|2|
+# exit 3: branch at 1669444
+1669410|3|
+# exit 4: branch at 1669484
+1669410|4|
+
+# game::component::WeakPoint::postInitialize  (1672E78)
+# exit 1: branch at 1672E8C
+1672E78|1|
+
+# game::component::WeakPointUser::postInitialize  (1673980)
+# exit 1: branch at 16739AC
+1673980|1|
+# exit 2: branch at 1673AE4
+1673980|2|
+# exit 3: branch at 1673B48
+1673980|3|
+
+# game::component::Windmill::postInitialize  (1676988)
+# exit 1: branch at 16769A4
+1676988|1|
+# exit 2: branch at 1676A20
+1676988|2|
+
+# game::component::ZonauGearControl::postInitialize  (1691F18)
+# exit 1: branch at 1691F44
+1691F18|1|
+# exit 2: branch at 1691F4C
+1691F18|2|
+# exit 3: branch at 1691F54
+1691F18|3|
+# exit 4: branch at 1692218
+1691F18|4|
+# exit 5: branch at 1692220
+1691F18|5|
+
+# engine::component::ASInfoComponent::postInitialize  (245F018)
+# exit 1: fall at 245F128, cannot be told apart from other paths
+245F018|1|
+# exit 2: shared at 245F12C, cannot be told apart from other paths
+245F018|2|
+
+# engine::component::ASOptimizeComponent::postInitialize  (245F4AC)
+# exit 1: fall at 245F5BC, cannot be told apart from other paths
+245F4AC|1|
+# exit 2: shared at 245F5C0, cannot be told apart from other paths
+245F4AC|2|
+
+# engine::component::ModelComponent::postInitialize  (2474994)
+# exit 1: branch at 2474B94
+2474994|1|
+# exit 2: branch at 2474D18
+2474994|2|
+# exit 3: branch at 2474DF4
+2474994|3|
+# exit 4: branch at 2474F28
+2474994|4|
+# exit 5: branch at 2474F94
+2474994|5|
+# exit 6: branch at 2475124
+2474994|6|
+# exit 7: branch at 2475164
+2474994|7|
+# exit 8: branch at 24752F4
+2474994|8|
+# exit 9: branch at 24752FC
+2474994|9|
+# exit 10: branch at 247532C
+2474994|10|
+# exit 11: branch at 24755FC
+2474994|11|
+# exit 12: branch at 247563C
+2474994|12|
+# exit 13: branch at 24757FC
+2474994|13|
+
+# FUN_71026c2734  (26C2734)
+# exit 1: entry at 26C2734
+26C2734|1|
+
+# game::component::ActorRenderingProxyClient::postInitialize  (27241D4)
+# exit 1: branch at 27241E4
+27241D4|1|
+# exit 2: branch at 27241EC
+27241D4|2|
+
+# game::component::AISchedule::initialize  (2724774)
+# exit 1: branch at 2724780
+2724774|1|
+# exit 2: branch at 2724788
+2724774|2|
+# exit 3: branch at 2724790
+2724774|3|
+
+# game::component::CombinedActorIntegratorUpdate::postInitialize  (2729F78)
+# exit 1: branch at 2729F88
+2729F78|1|
+# exit 2: branch at 2729F90
+2729F78|2|
+
+# game::component::Emotion::postInitialize  (272FBEC)
+# exit 1: branch at 272FBFC
+272FBEC|1|
+# exit 2: branch at 272FC04
+272FBEC|2|
+
+# game::component::HorseReinsOrSaddle::postInitialize  (2737AB8)
+# exit 1: branch at 2737AC8
+2737AB8|1|
+# exit 2: branch at 2737AD0
+2737AB8|2|
+
+# game::component::Memory::postInitialize  (273B214)
+# exit 1: branch at 1185B2C
+273B214|1|
+# exit 2: branch at 1185B34
+273B214|2|
+# exit 3: branch at 1185B3C
+273B214|3|
+# exit 4: branch at 1185B68
+273B214|4|
+# exit 5: branch at 1185B70
+273B214|5|
+# exit 6: branch at 1185BAC
+273B214|6|
+
+# game::component::Personality::postInitialize  (273F1F4)
+# exit 1: branch at 273F204
+273F1F4|1|
+# exit 2: branch at 273F20C
+273F1F4|2|
+
+# game::component::RagdollReactionController::postInitialize  (2742078)
+# exit 1: branch at 2742088
+2742078|1|
+# exit 2: branch at 2742090
+2742078|2|
+# exit 3: branch at 2742098
+2742078|3|

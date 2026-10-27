@@ -1,0 +1,43 @@
+# Functions whose exits are mapped (ExportReturnSites.py): the init steps the debugger judges by a false return.
+# One per line: offset (address minus the image base), then the name. The preloadPrepare / initialize / postInitialize function of every component
+# class is mapped as well, from component_vtables.tsv.
+AB92CC engine::actor::ActorMgr::requestCreateActorAsync
+12A8B44 engine::actor::ActorMgr::requestCreateActorSync
+1406788 game::scene::component::LimiterActorCountMgr::registerActor
+7FD750 shaft::baseproc::BaseProc::initialize
+D2BA4C engine::actor::ActorBase::initialize
+ABF20C engine::actor::ActorInfo::loadActorParam
+ABF4EC pp::GeneralFormatMgr::loadActorParam
+8942D8 pp::GeneralFormatMgr::loadDocumentImpl_
+E58CE0 engine::actor::ActorBase::initializeActor_
+E88F58 engine::component::GameParameterTableComponent::postInitialize
+E89018 engine::component::GameParameterTable::loadComponents
+A2A604 engine::component::LODComponent::postInitialize
+7A3DC0 engine::ai::AIControllerSet::initialize
+245BEA4 engine::component::AIComponent::postInitialize
+78B8E8 engine::component::PhysicsComponent::initialize
+70775C engine::component::PhysicsComponent::postInitialize
+707F54 phive::CreateControllerSetConfig
+70852C phive::ControllerSetConfig::initialize
+708088 phive::CreateControllerSet
+70F50C phive::ControllerSet::initialize
+7175E0 phive::CreatePhiveEntityControlExtension
+717A44 phive::CreateRigidBodyControllerSensor
+719028 phive::CreateRigidBodyControllerEntity
+71D8CC phive::CreateRigidBodyEntity
+71DCA0 phive::CreateRigidBodyEntityImpl
+D13BC0 phive::CreateRigidBodySensor
+86EDCC phive::CreateShapeMesh
+8727B4 phive::CreateShapeBox
+DA047C phive::CreateShapeSphere
+CF18CC phive::CreateShapeCapsule
+CF19B0 phive::CreateShapeCapsule
+873004 phive::CreateShapeCylinder
+7359FC phive::CreateShapeCompound
+D742B0 phive::ShapeResource::doCreate_
+76F8F0 ares::ResourceBinder::tryLoadSync
+8AF58C ares::ResourceUnit::loadFile
+798350 ares::ResourceUnit::initializeResource
+D97B5C engine::resource::ModelResource::postInitialize_
+75C140 gsys::ModelResource::create_
+75D59C gsys::ModelResource::initialize_

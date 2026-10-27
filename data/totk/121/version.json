@@ -1,0 +1,7 @@
+{
+  "game": "totk",
+  "version": "1.2.1",
+  "fingerprint": "0x181D91D8",
+  "symbols": true,
+  "note": "Function offsets are relative to the main module's load address. book.tsv names the functions, steps.psv lists the init steps built from them, return_sites.tsv is the Ghidra export of every exit of every step function, exits.psv holds the written reason for each exit, components.psv one reason per component class."
+}

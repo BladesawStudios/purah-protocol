@@ -1,0 +1,8 @@
+{
+  "id": "purah-protocol",
+  "entry": "src/mod.cpp",
+  "sources": [],
+  "target": "switch",
+  "heapRequest": 229376,
+  "require": ["wiixl.core@1.7", "wiixl.call@1.0", "wiixl.net@1.2", "wiixl.patch@1.0"]
+}

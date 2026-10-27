@@ -1,0 +1,79 @@
+# The steps purah-protocol follows for a watched actor, in the order a spawn reaches them. TotK 1.2.1.
+#
+# Columns, separated by |:
+#   offset  the step's place in the symbol book (hex, a function entry or a call site)
+#   phase   the group the ladder shows it under
+#   rule    how its result is judged:  zero  = a zero (false / null) return is a failure
+#                                      code  = any return but 1 is a failure (the BaseProc init code)
+#                                      warn  = a zero return is worth saying but the game carries on
+#                                      none  = recorded, never judged
+#   named   what to name the step after: arg0 = the component whose vtable is in the first argument,
+#           result = the component the call returned, - = nothing
+#   flags   root = the step whose return ends the actor's initialisation (the verdict is built there);
+#           stage=preload|initialize|post = a call site that runs one stage of the component named in its first argument (the exit table
+#           for that component's stage function says which way it failed);
+#           container = a step that fails because something inside it failed (so the verdict names the deepest failure, and uses a container only when nothing inside it did);
+#           request = the step that sees the creation request; - = none
+#   label   what the step is, in a few words
+#   meaning what a failure at this step means, and what to check. Written from the decompiles (docs/live-debugger-actor-lifecycle*.md).
+#
+# Two rows (allocateGroupID, CreatePhiveEntityControlExtension) were added to the end of the symbol book for this catalog.
+#
+ab92cc|Request|zero|-|request|Creation requested (async)|The creation request was refused: the game returned false before anything was queued. Check that the name is an actor the game knows (it needs an ActorInfo row, and an Actor/<name> file in the pack) and that creation is not blocked by a budget.
+12a8b44|Request|zero|-|request|Creation requested (sync)|The creation request was refused: the game returned false before anything was made. Check that the name is an actor the game knows (an ActorInfo row, and an Actor/<name> file in the pack) and that creation is not blocked by a budget.
+1406788|Request|zero|-|-|Registered with the actor budget|The actor's budget category is at its cap, so the game refused to register the actor and it will not exist. Check the actor's limiter category and how many of that category are already alive.
+7fd750|Initialise|code|-|root,container|Initialisation (BaseProc::initialize)|The actor's initialisation ended with a failure code. The first failed step in the ladder is the reason; the code only says which stage gave up. For an actor, code 6 (the setup stage, which builds its components) is the normal code for any component or parameter failure.
+7fd7a0|Initialise|zero|-|-|Prepare (slot +0x48)|The prepare stage returned false, so initialisation ends with code 0 before anything is built.
+7fd904|Initialise|none|-|-|Setup stage (slot +0x60)|For an actor this stage builds its components and loads its parameters. If it returns false, initialisation ends with code 6; the failed step before it is the reason. Its own result cannot be read separately.
+7fd91c|Initialise|code|-|container|Second stage (slot +0x50)|The second stage returned a code other than 1. It runs only if the setup stage succeeded.
+7fd97c|Initialise|none|-|-|Final code reported (finishInitialization)|Recorded only. The game calls this with the final code whatever happened.
+d2ba4c|Actor|zero|-|container|ActorBase::initialize|ActorBase::initialize returned false, which ends initialisation with code 0. It loads the actor's info and the Actor/<name> document, builds the job lists, runs the component stages, then loads the AI blackboard documents; the first failed step before this one is the reason.
+abc1c0|Actor info|warn|-|-|ActorInfo row (RSDB)|The actor has no row in the ActorInfo table. The game falls back to reading Actor/<name> itself, so anything that comes from the table is lost: the tag flags UsePreActorRenderer, IsFarActor and EventHideCharacter are taken from the file instead. Add a row, or confirm the tags you rely on come from the file.
+abf20c|Actor info|zero|-|-|ActorInfo fallback (Actor/<name>)|The fallback also failed: the document Actor/<name>.engine__actor__ActorParam.gyml is missing from the pack, or is not that type, so the actor's info stays empty. Check that the file is at that exact path in the pack.
+abf4ec|Parameters|zero|-|-|Actor/<name> document|The actor's own parameter document did not load. Check that Actor/<name>.engine__actor__ActorParam.gyml exists in the pack at that path and that its $parent chain resolves to the same class.
+8942d8|Parameters|zero|path1|sret|Parameter document|A parameter document the actor needs did not load: the file is missing from the pack, or it is not the type that was asked for. The path is shown on the step. Check it exists at exactly that path in the pack and that its type and $parent chain are right.
+e58ce0|Actor|zero|-|container|Actor components (initializeActor_)|initializeActor_ returned 0. Either the Actor/<name> document did not load or one component stage returned false. The first failed step above says which.
+e594b4|Components|none|result|-|Component slot filled|A null result here is normal: the actor does not have that optional component (the game marks the slot empty and carries on). Only the ones that were created are named.
+e59544|Components|none|arg0|stage=preload|Component preload|Recorded only. The preload stage's result is not tested by the game.
+e59bf0|Components|zero|arg0|stage=initialize|Component initialise (slot +0x48)|A component's initialise stage returned false, so the actor fails at this component. The component is named in the step; its parameter file or a resource it needs is the usual cause, shown in the failed steps and notices around it.
+e59bb8|Components|zero|arg0|stage=post|Component post-initialise (slot +0x50)|A component's post-initialise stage returned false, so the actor fails at this component. The component is named in the step; its parameter file or a resource it needs is the usual cause, shown in the failed steps and notices around it.
+e59de8|Components|none|-|-|Actor post-step (slot +0x168)|If the actor's post-step returns false the actor fails here. Its result cannot be read separately; the initializeActor_ result says whether it failed.
+d5ee08|Late component|none|arg0|stage=preload|Late component preload|Recorded only.
+d5ee18|Late component|none|arg0|-|Late component initialise count|Recorded only. A count below 1 skips the initialise rounds.
+d5f04c|Late component|none|arg0|stage=initialize|Late component initialise rounds|If a round returns false the late component is not added. The result cannot be read separately; the post-initialise result and createComponent say whether it failed.
+d5ee34|Late component|zero|arg0|stage=post|Late component post-initialise|A component added after the main loop failed its post-initialise stage, so createComponent returned no component. The component is named in the step.
+e88f58|Game parameters|zero|arg0|-|GameParameterTable component|The game parameter table's root document is missing, so the actor fails. (A missing document for one entry of the table is not reported: that entry silently gets id 0 and its values read as defaults.) Check the table document exists at the path the component builds.
+e89018|Game parameters|zero|-|-|Game parameter table load|The table's root document did not load. Check the GameParameterTable document at the actor's table path.
+a2a604|Components|zero|arg0|-|LOD component|The LOD document is missing or is not the LOD type, so the LOD component failed and with it the actor. Check the LOD document the actor names exists and is of the right type.
+7a3dc0|AI|zero|-|-|AI controller set|One of the actor's listed AI controllers failed to initialise: its .ainb graph is missing or could not be loaded. Check every controller name in the AI document has its .ainb in the pack.
+245bea4|AI|zero|arg0|-|AI component|The AI component failed: the AI document is missing or the wrong type, all four AI controller names are empty, or the controller set failed (the step before this one). Check the AI document and that at least one controller name is set.
+78b8e8|Physics|zero|arg0|-|Physics component initialise|The physics component's initialise stage returned false.
+248f8c4|Physics|none|resultstr|-|Controller set chosen|Recorded only. This is the controller set the physics component will load (it may be overridden by the actor's blackboard); if the set does not exist or fails to load, the steps after this one fail.
+70775c|Physics|zero|arg0|-|Physics component post-initialise|PhysicsComponent::postInitialize fails when the controller set config or the controller set cannot be created. The steps below it in the ladder say which of them failed and where.
+707f54|Physics|zero|-|-|Controller set config created|The controller set config could not be created: the ControllerSetParam document did not load or its initialisation rejected it. Check Phive/ControllerSetParam/<set> exists and loads, and the files it lists.
+70852c|Physics|zero|-|-|Controller set config initialise|The controller set config was rejected while being built from the ControllerSetParam. Check every file and shape it lists loads (the steps just before this one show which failed).
+23080d0|Physics|none|-|-|Controller set config resource lookup|Recorded only.
+708088|Physics|zero|-|-|Controller set created|The controller set could not be created from its config. The step that follows it (ControllerSet::initialize) says why.
+70f50c|Physics|zero|-|-|Controller set initialise|ControllerSet::initialize returned false. It checks, in this order: the parameter lists have the counts it expects (for example AliasEntityList and ControllerEntityNamePathAry), a physics group id can be allocated, each controller sensor is created, the entity control extension is created, and each controller entity is created. The failed steps just before this one show which of the last three failed; if none did, a list count or an alias did not match, so check that every AliasEntityList ControllerName names a controller entity the set lists and every RigidBodyName names a body it has.
+c74f7c|Physics|none|-|-|Physics group id allocated|Recorded only. If the physics group ids are used up, ControllerSet::initialize fails right after this step with no sensor or entity step following.
+7175e0|Physics|zero|-|-|Entity control extension created|The entity control extension for a controller entity could not be created, so the controller set fails.
+717a44|Physics|zero|-|-|Controller sensor created|A controller sensor entity could not be created. Check the RigidBodyControllerEntityParam file the controller set names for the sensor and the shape it uses.
+719028|Physics|zero|-|-|Controller entity created|A controller entity could not be created. Check the RigidBodyControllerEntityParam file the controller set names for it (Work/Phive/RigidBodyControllerEntityParam/...) and the shape it uses.
+71d8cc|Physics|zero|-|-|Rigid body entity created|A rigid body entity could not be created from its parameters or its shape.
+71dca0|Physics|zero|-|-|Rigid body entity created (impl)|A rigid body entity could not be created from its parameters or its shape.
+d13bc0|Physics|zero|-|-|Rigid body sensor created|A rigid body sensor could not be created from its parameters or its shape.
+86edcc|Physics|zero|-|-|Mesh shape created|A mesh collision shape could not be created: its shape resource is missing or invalid.
+8727b4|Physics|zero|-|-|Box shape created|A box collision shape could not be created from its parameters.
+da047c|Physics|zero|-|-|Sphere shape created|A sphere collision shape could not be created from its parameters.
+cf18cc|Physics|zero|-|-|Capsule shape created|A capsule collision shape could not be created from its parameters.
+cf19b0|Physics|zero|-|-|Capsule shape created (variant)|A capsule collision shape could not be created from its parameters.
+873004|Physics|zero|-|-|Cylinder shape created|A cylinder collision shape could not be created from its parameters.
+7359fc|Physics|zero|-|-|Compound shape created|A compound collision shape could not be created: one of its parts is missing or invalid.
+d742b0|Physics|zero|-|-|Shape resource created|A shape resource (a baked collision shape file) could not be created: the file is missing, empty or invalid.
+76f8f0|Resources|zero|-|-|Resource loaded (sync)|A synchronous resource load failed: the file was not found or was empty. Check the path exists in the actor's pack or in the game's global files, with the right extension.
+8af58c|Resources|zero|-|-|Resource file read|A resource file could not be read: it was not found, or it was empty.
+798350|Resources|zero|-|-|Resource initialised|A resource was read but the initialiser for its type rejected it, so the file is not a valid instance of its type. Check the file is the type its extension says.
+d97b5c|Model|zero|-|-|Model resource post-initialise|The model resource failed its post-initialisation. The game does not validate a bfres, so a malformed one is read wrongly rather than refused; a failure here means the load itself failed. Check the model's files all exist in the pack.
+75c140|Model|zero|-|-|Model resource created|The model resource could not be created.
+75d59c|Model|zero|-|-|Model resource initialised|The model resource could not be initialised.
+760398|Model|none|-|-|Model data set up|Recorded only.

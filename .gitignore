@@ -1,0 +1,21 @@
+# Written by build_mod.py beside whatever it builds: absolute paths to this checkout and to devkitPro.
+compile_commands.json
+.vscode/
+
+# Build output.
+*.wxlm
+*.elf
+*.tkcl
+*.zip
+exefs/
+options/
+
+# Ghidra exports are the game's own decompiled code and symbols, so they stay on the machine that made them;
+# the data folder holds what is derived from them.
+tools/ghidra/*.tsv
+tools/ghidra/*.txt
+tools/ghidra/exported/
+tools/ghidra/scratch/
+
+# A working file of the export; it quotes decompiled return statements.
+data/*/*/return_sites_report.tsv
